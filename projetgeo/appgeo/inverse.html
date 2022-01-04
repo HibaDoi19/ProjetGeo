@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Probléme Inverse</h1>
+
+
+
+
+<form action ="http://127.0.0.1:8000/appgeo/resul" >
+    
+    
+<!--<form id="choix_sys" >
+    <label> choose a system</label>
+    <select name="sys" size="1">
+    <option  value="1"> WGS 84
+    <option  value="2"> WGS 72
+    <option  value="3"> WGS 66
+    <option  value="4"> WGS 60
+    <option  value="5"> South American 1969
+    <option  value="6"> Krassovsky 1940
+    <option  value="7"> International
+    <option  value="8"> Hough 1956
+    <option  value="9"> G R S 1980
+    <option  value="10"> G R S 1975
+    <option  value="11"> G R S 1967
+    <option  value="12"> Fischer 1968
+    <option  value="13"> Fischer 1960
+    <option  value="14"> Everest 1830
+    <option  value="15"> Clarke 1880
+    <option  value="16"> Clarke 1886
+    <option  value="17"> Bessel 1841
+    <option  value="18"> Airy 1830
+    </SELECT>
+    </form>
+-->
+    <!--<form id="a_b" >-->
+    entrer a : <input type="text" name="a"><br> 
+    entrer b : <input type="text" name="b"><br> 
+    <!--</form> -->
+    
+    
+    
+    
+
+    entrer latitude1 d : <input type="text" name="d" required>
+    entrer latitude1 min : <input type="text" name="min" required> 
+    entrer latitude1 ss : <input type="text" name="ss" required><br>
+    entrer longitude1 d : <input type="text" name="dlo" required>
+    entrer longitude1 min : <input type="text" name="minlo" required> 
+    entrer longitude1 ss : <input type="text" name="sslo" required><br>
+
+    entrer latitude2 d : <input type="text" name="d2" required>
+    entrer latitude2 min : <input type="text" name="min2" required> 
+    entrer latitude2 ss : <input type="text" name="ss2" required><br>
+    entrer longitude2 d : <input type="text" name="dlo2" required>
+    entrer longitude2 min : <input type="text" name="minlo2" required> 
+    entrer longitude2 ss : <input type="text" name="sslo2" required><br>
+
+   
+    <input type="submit">
+    
+</form>
+{% endblock %}
