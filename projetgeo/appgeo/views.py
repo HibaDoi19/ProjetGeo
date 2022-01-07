@@ -28,7 +28,7 @@ def add(request):
                         CosBeta0 = cos(Beta1)*sin(alpha1)
                         Beta0 = acos(CosBeta0)
                         #Calcul de la constante w2
-                        w2 = (sin(Beta0)*ep)*2
+                        w2 = (sin(Beta0)*ep)**2
                         #Calcul de la distance angulaire sigma1 sur la sphère auxiliaire
                         sigma1 = atan2( TanBeta1, cos(alpha1) )
                         #Calcul de l'azimut de la géodésique à l'équateur alphae
@@ -58,6 +58,11 @@ def add(request):
                         #Calcul de la différence de longitude dellambda
                         deltalambda = deltau - (1-C) * f * Sinalphae *(sigma + C * sin(sigma) * (cos(sigma_m2) +C * cos(sigma) * (-1 + 2 * pow(cos(sigma_m2),2) )))
                         longitude2 = longitude1 + deltalambda
+                        
+                        if longitude2<0 and latitude1>0: #condition ajouteé
+                                longitude2=longitude2+pi
+                        elif longitude2<0 and latitude1<0:
+                                longitude2=longitude2
                         #Calcul de l'azimut alpha2 et de l'azimut inverse
                         alpha2 = atan2 ( Sinalphae, (cos(Beta1) * cos(sigma) * cos(alpha1)-sin(Beta1) * sin(sigma)))
                         if ( alpha2 < pi ) :
@@ -92,15 +97,27 @@ def add(request):
 def inverse(request):
         def inversee(phi1,phi2,lam1,lam2,a,b):
                 f = (a-b)/a
-                if phi1==90 or phi1==-90:
+                #condition sur phi1
+                if phi1 >90 or phi1<-90 :
+                        print('la valeur de la latitude doit être inférieur ou égal à 90°')
+                elif phi1==90 or phi1==-90:
                         beta1=phi1
                 else:
                         beta1=atan((1-f)*tan(phi1))
-                if phi2==90 or phi2==-90:
+                #condition sur phi2
+                if phi2 > 90 or phi2 < -90:
+                        print('la valeur de la latitude doit être inférieur ou égal à 90°')
+                elif phi2 == 90 or phi2 == -90:
                         beta2=phi2
                 else:
                         beta2=atan((1-f)*tan(phi2))
-                '''Calcul de la différence de longitude sur l'ellipsoïde'''
+                        #condition sur lam1
+                if lam1>180 or lam1<-180 :
+                        print('la valeur de la longétude doit être inférieur ou égal à 180°')
+                #condition sur lam2
+                if lam2>180 or lam2<-180 :
+                        print('la valeur de la longétude doit être inférieur ou égal à 180°')
+                '''Calcul de la différence de longitude sur l ellipsoïde'''
                 delta_lam=lam2-lam1
                 delta_u0= delta_lam
                 #Calcul par itération
@@ -109,30 +126,30 @@ def inverse(request):
                 Sin_sigma = sqrt(sin2_sigma )
                 Cos_sigma = sin(beta1) * sin(beta2) + cos(beta1)*cos(beta2)*cos(delta_lam)
                 sigma = atan2(Sin_sigma, Cos_sigma)
-                Sin_alphaE = cos(beta1)* cos(beta2)*sin(delta_lam)/ sin(sigma)
+                Sin_alphaE = cos(beta1)* cos(beta2)*sin(delta_lam)/ Sin_sigma
                 alphaE = asin(Sin_alphaE)
-                Cos2sigma_m = cos(sigma) - (2 * sin(beta1) * sin(beta2) / pow(cos(alphaE), 2) )
+                Cos2sigma_m = Cos_sigma - (2 * sin(beta1) * sin(beta2) / pow(cos(alphaE), 2) )
                 #C Constante de Vincenty
                 C = (f/16) * pow(cos(alphaE), 2) * (4 + f * (4 - 3 * pow(cos(alphaE), 2)))
-                delta_u = delta_lam + (1-C)*f*sin(alphaE)*(sigma + C * sin(sigma)*(Cos2sigma_m + C*cos(sigma)*(-1 + 2 * pow(Cos2sigma_m, 2))))
-                while delta_u - delta_u0>1.0e-5:
-                # calcul des grandeurs suivantes
+                delta_u = delta_lam + (1-C)*f* sin(alphaE)*(sigma + C * Sin_sigma *(Cos2sigma_m + C* Cos_sigma *(-1 + 2 * pow(Cos2sigma_m, 2))))
+                while abs(delta_u - delta_u0)>1.0e-5:
+                        # calcul des grandeurs suivantes
                         sin2_sigma = pow(cos(beta2) * sin(delta_u), 2) + pow((cos(beta1) * sin(beta2) - sin(beta1) * cos(beta2) * cos(delta_u)), 2)
                         Sin_sigma = sqrt(sin2_sigma)
                         Cos_sigma = sin(beta1) * sin(beta2) + cos(beta1) * cos(beta2) * cos(delta_u)
                         sigma = atan2(Sin_sigma, Cos_sigma)
-                        Sin_alphaE = cos(beta1) * cos(beta2) * sin(delta_u) / sin(sigma)
+                        Sin_alphaE = cos(beta1) * cos(beta2) * sin(delta_u) / Sin_sigma
                         alphaE = asin(Sin_alphaE)
-                        Cos2sigma_m = cos(sigma) - (2 * sin(beta1) * sin(beta2) / pow(cos(alphaE), 2))
+                        Cos2sigma_m = Cos_sigma - (2 * sin(beta1) * sin(beta2) / pow(cos(alphaE), 2))
                         # C Constante de Vincenty
                         C = (f / 16) * pow(cos(alphaE), 2) * (4 + f * (4 - 3 * pow(cos(alphaE), 2)))
-                        delta_u = delta_u0
-                        delta_u0= delta_lam + (1 - C) * f * sin(alphaE) * (sigma + C * sin(sigma) * (Cos2sigma_m + C * cos(sigma) * (-1 + 2 * pow(Cos2sigma_m, 2))))
+                        delta_u0 = delta_u
+                        delta_u= delta_lam + (1 - C) * f * sin(alphaE) * (sigma + C * Sin_sigma * (Cos2sigma_m + C * Cos_sigma * (-1 + 2 * pow(Cos2sigma_m, 2))))
                 '''Calcul de la latitude réduite de vertex de la géodésie'''
                 beta0=acos(Sin_alphaE)
                 #Calcul de la constante w_carre
-                w_carre = pow(cos(alphaE),2) * (a*a-b*b) / (b*b)
-                #Calcul des constantes de Vincenty A et B
+                w_carre =((a*a-b*b) / (b*b))*pow(sin(beta0),2)
+                #Calcul des constantes de Vincenty A' et B'
                 A = 1 + (w_carre/16384) * (4096 + w_carre * (-768 + w_carre * (320 - 175 * w_carre)))
                 B = (w_carre/1024) * (256 + w_carre * (-128+ w_carre * (74 - 47 * w_carre)))
                 #Calcul de delta_sigma
@@ -147,16 +164,17 @@ def inverse(request):
                         alpha12 =  alpha12 + 2*pi
                 if ( alpha12 > 2*pi ) :
                         alpha12 = alpha12 - 2*pi
-                        alpha21 = alpha21 + 2*pi / 2.0
+                alpha21 = alpha21 + 2*pi / 2.0
                 if ( alpha21 < 0.0 ) :
                         alpha21 = alpha21 + 2*pi
                 if ( alpha21 > 2*pi ) :
                         alpha21 = alpha21 - 2*pi
 
-
                 alpha12 = alpha12*180/pi
                 alpha21 = alpha21*180/pi
-                return(alpha12,alpha21,s)
+                return alpha12, alpha21, s
+                #return round(alpha12), round(alpha21), round(s)
+                
         a=float(request.GET['a'])
         b=float(request.GET['b'])
         phi1d=float(request.GET['d'])
