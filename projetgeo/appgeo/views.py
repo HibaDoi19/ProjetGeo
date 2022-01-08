@@ -78,7 +78,7 @@ def add(request):
                         #if longitude2<0:
                         # longitude2 = longitude2+360'''
                         return round(longitude2), round(latitude2), round(alpha21)
-                        #ADD CAS CRITIQUE APRES
+
         latitude1d=int(request.GET['d'])
         latitude1mm=int(request.GET['min'])
         latitude1ss=int(request.GET['ss'])
