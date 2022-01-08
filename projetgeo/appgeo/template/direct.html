@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script>
+    var showForm = function(id){
+        document.getElementById(id).style.display = '';
+      }
+</script>
+
+<h1>Probléme Direct</h1>
+<form action ="http://127.0.0.1:8000/appgeo/resultd" >
+
+    <form id="choix_sys" >
+        <label> choose a system</label>
+        <select name="sys" size="1">
+        <option  value="1"> WGS 84
+        <option  value="2"> WGS 72
+        <option  value="3"> WGS 66
+        <option  value="4"> WGS 60
+        <option  value="5"> South American 1969
+        <option  value="6"> Krassovsky 1940
+        <option  value="7"> International
+        <option  value="8"> Hough 1956
+        <option  value="9"> G R S 1980
+        <option  value="10"> G R S 1975
+        <option  value="11"> G R S 1967
+        <option  value="12"> Fischer 1968
+        <option  value="13"> Fischer 1960
+        <option  value="14"> Everest 1830
+        <option  value="15"> Clarke 1880
+        <option  value="16"> Clarke 1886
+        <option  value="17"> Bessel 1841
+        <option  value="18"> Airy 1830
+        </SELECT>
+        </form>
+   
+    entrer a : <input type="text" name="a"><br> 
+    entrer b : <input type="text" name="b"><br> 
+
+    
+    entrer latitude d : <input type="text" name="d" required>
+    entrer latitude min : <input type="text" name="min"required> 
+    entrer latitude ss : <input type="text" name="ss"required><br>
+    entrer longitude d : <input type="text" name="dlo" required>
+    entrer longitude min : <input type="text" name="minlo"required> 
+    entrer longitude ss : <input type="text" name="sslo"required><br>
+    entrer azimut du point du départ en degres decimal : <input type="text" name="az" required><br> 
+    entrer la distance géodesique en métre : <input type="text" name="s" required><br>
+   
+    <input type="submit">
+    
+</form>
+
+{% endblock %}
+
+
