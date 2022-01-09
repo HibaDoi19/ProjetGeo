@@ -77,7 +77,7 @@ def direct(latitude1, longitude1, alpha1, s, a, b):
                 #longitude2 = longitude2-360
                 #if longitude2<0:
                 # longitude2 = longitude2+360
-                return round(longitude2), round(latitude2), round(alpha21)
+                return longitude2, latitude2, alpha21
 
 def say_hello(request):
         return render(request ,'direct.html')
@@ -100,10 +100,79 @@ def add(request):
         longitude1ss=int(request.GET['sslo'])
         longitude1=(int(longitude1d) +int(longitude1mm)/60+int(longitude1ss)/3600)*pi/180
         s=float(request.GET['s'])
-        a=float(request.GET['a'])
-        b=float(request.GET['b'])
+        aa=float(request.GET['aa'])
+        bb=float(request.GET['bb'])
         alpha1=float(request.GET['az'])
-        res1,res2,res3=direct(latitude1, longitude1, alpha1, s, a, b)
+
+        drc_lat=int(request.GET["drc_lat"])
+        drc_long=int(request.GET["drc_long"])
+
+        systeme=request.GET['sys']
+        if systeme =="1":
+                a=6378137
+                b=a*(1-1/298.257223563)
+        elif systeme =="2":
+                a=6378135
+                b=a*(1-1/298.26)
+        elif systeme =="3":
+                a=6378145
+                b=a*(1-1/298.25)
+        elif systeme =="4":
+                a=6378165
+                b=a*(1-1/298.3)
+        elif systeme =="5":
+                a=6378160
+                b=a*(1-1/298.25)
+        elif systeme =="6":
+                a=6378245
+                b=a*(1-1/298.3)
+        elif systeme =="7":
+                a=6378288
+                b=a*(1-1/297)
+        elif systeme =="8":
+                a=6378270
+                b=a*(1-1/297)
+        elif systeme =="9":
+                a=6378137
+                b=a*(1-1/298.257222101)
+        elif systeme =="10":
+                a=6378140
+                b=a*(1-1/298.257) 
+        elif systeme =="11":
+                a=6378160
+                b=a*(1-1/298.247167427)  
+        elif systeme =="12":
+                a=6378150
+                b=a*(1-1/298.3)
+        elif systeme =="13":
+                a=6378166
+                b=a*(1-1/298.3)
+        elif systeme =="14":
+                a=6377276.345
+                b=a*(1-1/300.8017)
+        elif systeme =="15":
+                a=6378249.145
+                b=a*(1-1/293.465)
+        elif systeme =="16":
+                a=6378206.4
+                b=a*(1-1/294.9786982)
+        elif systeme =="17":
+                a=6377397.155
+                b=a*(1-1/299.1528128)
+        elif systeme =="18":
+                a=6377563.396
+                b=a*(1-1/299.3249646)
+        if  aa==0 or bb==0 or not aa or not bb:
+                x=a
+                y=b
+        else:
+                x=aa
+                y=bb
+        latitude1=latitude1*drc_lat
+        longitude1=longitude1*drc_long
+        
+        res1,res2,res3=direct(latitude1, longitude1, alpha1, s, x, y)
+        #res1=str(int(res1))+"°"
         return render( request   ,'result.html', {'result1': res1 ,'result2': res2 ,'result3': res3 } )
 
 
@@ -194,72 +263,7 @@ def inverse(request):
                 return alpha12, alpha21, s
                 #return round(alpha12), round(alpha21), round(s)
 
-                """f = (a-b)/a
-                if phi1==90 or phi1==-90:
-                        beta1=phi1
-                else:
-                        beta1=atan((1-f)*tan(phi1))
-                if phi2==90 or phi2==-90:
-                        beta2=phi2
-                else:
-                        beta2=atan((1-f)*tan(phi2))
-                '''Calcul de la différence de longitude sur l'ellipsoïde'''
-                delta_lam=lam2-lam1
-                delta_u0= delta_lam
-                #Calcul par itération
-                #calcul des grandeurs suivantes
-                sin2_sigma=pow(cos(beta2)*sin(delta_lam), 2) + pow((cos(beta1)*sin(beta2) - sin(beta1)*cos(beta2)*cos(delta_lam)),2)
-                Sin_sigma = sqrt(sin2_sigma )
-                Cos_sigma = sin(beta1) * sin(beta2) + cos(beta1)*cos(beta2)*cos(delta_lam)
-                sigma = atan2(Sin_sigma, Cos_sigma)
-                Sin_alphaE = cos(beta1)* cos(beta2)*sin(delta_lam)/ sin(sigma)
-                alphaE = asin(Sin_alphaE)
-                Cos2sigma_m = cos(sigma) - (2 * sin(beta1) * sin(beta2) / pow(cos(alphaE), 2) )
-                #C Constante de Vincenty
-                C = (f/16) * pow(cos(alphaE), 2) * (4 + f * (4 - 3 * pow(cos(alphaE), 2)))
-                delta_u = delta_lam + (1-C)*f*sin(alphaE)*(sigma + C * sin(sigma)*(Cos2sigma_m + C*cos(sigma)*(-1 + 2 * pow(Cos2sigma_m, 2))))
-                while delta_u - delta_u0>1.0e-5:
-                # calcul des grandeurs suivantes
-                        sin2_sigma = pow(cos(beta2) * sin(delta_u), 2) + pow((cos(beta1) * sin(beta2) - sin(beta1) * cos(beta2) * cos(delta_u)), 2)
-                        Sin_sigma = sqrt(sin2_sigma)
-                        Cos_sigma = sin(beta1) * sin(beta2) + cos(beta1) * cos(beta2) * cos(delta_u)
-                        sigma = atan2(Sin_sigma, Cos_sigma)
-                        Sin_alphaE = cos(beta1) * cos(beta2) * sin(delta_u) / sin(sigma)
-                        alphaE = asin(Sin_alphaE)
-                        Cos2sigma_m = cos(sigma) - (2 * sin(beta1) * sin(beta2) / pow(cos(alphaE), 2))
-                        # C Constante de Vincenty
-                        C = (f / 16) * pow(cos(alphaE), 2) * (4 + f * (4 - 3 * pow(cos(alphaE), 2)))
-                        delta_u = delta_u0
-                        delta_u0= delta_lam + (1 - C) * f * sin(alphaE) * (sigma + C * sin(sigma) * (Cos2sigma_m + C * cos(sigma) * (-1 + 2 * pow(Cos2sigma_m, 2))))
-                '''Calcul de la latitude réduite de vertex de la géodésie'''
-                beta0=acos(Sin_alphaE)
-                #Calcul de la constante w_carre
-                w_carre = pow(cos(alphaE),2) * (a*a-b*b) / (b*b)
-                #Calcul des constantes de Vincenty A et B
-                A = 1 + (w_carre/16384) * (4096 + w_carre * (-768 + w_carre * (320 - 175 * w_carre)))
-                B = (w_carre/1024) * (256 + w_carre * (-128+ w_carre * (74 - 47 * w_carre)))
-                #Calcul de delta_sigma
-                delta_sigma = B * Sin_sigma * (Cos2sigma_m + (B/4)*(Cos_sigma * (-1 + 2 * pow(Cos2sigma_m, 2) )-(B/6) * Cos2sigma_m * (-3 + 4 *sin2_sigma)*(-3 + 4 * pow(Cos2sigma_m,2 ) )))
-                #Calcul de la distance géodésique s
-                s = b * A * (sigma - delta_sigma)
-                #Calcul de l'azimut directe alpha12
-                alpha12 = atan2( (cos(beta2) * sin(delta_lam)),(cos(beta1) * sin(beta2) - sin(beta1) * cos(beta2) * cos(delta_lam)))
-                #Calcul de l'azimut inverse alpha21
-                alpha21 = atan2( (cos(beta1) * sin(delta_lam)),(-sin(beta1) * cos(beta2) + cos(beta1) * sin(beta2) * cos(delta_lam)))
-                if ( alpha12 < 0.0 ) :
-                        alpha12 =  alpha12 + 2*pi
-                if ( alpha12 > 2*pi ) :
-                        alpha12 = alpha12 - 2*pi
-                        alpha21 = alpha21 + 2*pi / 2.0
-                if ( alpha21 < 0.0 ) :
-                        alpha21 = alpha21 + 2*pi
-                if ( alpha21 > 2*pi ) :
-                        alpha21 = alpha21 - 2*pi
-
-
-                alpha12 = alpha12*180/pi
-                alpha21 = alpha21*180/pi
-                return(alpha12,alpha21,s)"""
+                
         aa=float(request.GET['aa'])
         bb=float(request.GET['bb'])
         phi1d=float(request.GET['d'])
@@ -279,6 +283,11 @@ def inverse(request):
         lam1= (lam1d + lam1mm/60+ lam1ss/3600)*pi/180
         lam2= (lam2d + lam2mm/60+ lam2ss/3600)*pi/180
         
+        drc_lat_1=int(request.GET["drc_lat_1"])
+        drc_long_1=int(request.GET["drc_long_1"])
+        drc_lat_2=int(request.GET["drc_lat_2"])
+        drc_long_2=int(request.GET["drc_long_2"])
+
         systeme=request.GET['sys']
         if systeme =="1":
                 a=6378137
@@ -342,8 +351,30 @@ def inverse(request):
         else:
                 x=aa
                 y=bb
+        phi1=phi1*drc_lat_1
+        phi2=phi2*drc_lat_2
+        lam1=lam1*drc_long_1
+        lam2=lam2*drc_long_2
+        
         res=inversee(phi1,phi2,lam1,lam2,x,y)
         return render( request ,'resultinv.html', {'result': res } )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def visualisation(longitude1 , latitude1,alpha1,s,a,b):

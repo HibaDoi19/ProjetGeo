@@ -10,7 +10,7 @@
 <h1>Probléme Direct</h1>
 <form action ="http://127.0.0.1:8000/appgeo/resultd" >
 
-    <form id="choix_sys" >
+    
         <label> choose a system</label>
         <select name="sys" size="1">
         <option  value="1"> WGS 84
@@ -31,19 +31,27 @@
         <option  value="16"> Clarke 1886
         <option  value="17"> Bessel 1841
         <option  value="18"> Airy 1830
-        </SELECT>
-        </form>
+        </SELECT><br>
+        
    
-    entrer a : <input type="text" name="a"><br> 
-    entrer b : <input type="text" name="b"><br> 
+    entrer a : <input type="number" name="aa" value="0"><br> 
+    entrer b : <input type="number" name="bb" value="0"><br> 
 
     
     entrer latitude d : <input type="text" name="d" required>
     entrer latitude min : <input type="text" name="min"required> 
-    entrer latitude ss : <input type="text" name="ss"required><br>
+    entrer latitude ss : <input type="text" name="ss"required>
+    <select name="drc_lat" size="1">
+        <option value="1"> N </option>
+        <option value="-1"> S </option>
+    </select><br>
     entrer longitude d : <input type="text" name="dlo" required>
     entrer longitude min : <input type="text" name="minlo"required> 
-    entrer longitude ss : <input type="text" name="sslo"required><br>
+    entrer longitude ss : <input type="text" name="sslo"required>
+    <select name="drc_long" size="1">
+        <option value="1"> E </option>
+        <option value="-1"> W </option>
+    </select><br>
     entrer azimut du point du départ en degres decimal : <input type="text" name="az" required><br> 
     entrer la distance géodesique en métre : <input type="text" name="s" required><br>
    

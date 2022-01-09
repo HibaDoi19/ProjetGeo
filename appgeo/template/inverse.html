@@ -35,27 +35,53 @@
     
 
     <h4 class="cont">Or enter a and b values <small>(en m)</small></h4 class="cont">
-        <h4>entrer a : </h4> <input type="number" name="aa" value="0" ><br> 
-        <h4>entrer b : </h4> <input type="number" name="bb"value="0" ><br> 
+        <label> la valeur de a</label>
+        <input type="number" name="aa" value="0" >
+        <label> la valeur de b</label>
+        <input type="number" name="bb"value="0" ><br> 
    
     
     
     
-    
+    <div class="box">
+    <div>
+    <label> La latitude du premier point</label><br>
+    <input type="text" name="d" placeholder="degree" required>
+    <input type="text" name="min" placeholder="minute" required> 
+    <input type="text" name="ss"placeholder="seconde" required>
+    <select name="drc_lat_1" size="1">
+        <option value="1"> N </option>
+        <option value="-1"> S </option>
+    </select><br>
+    <label> La longitude du premier point</label><br>
+    <input type="text" name="dlo" placeholder="degree" required>
+    <input type="text" name="minlo" placeholder="minute" required> 
+    <input type="text" name="sslo" placeholder="seconde"required>
+    <select name="drc_long_1" size="1">
+        <option value="1"> E </option>
+        <option value="-1"> W </option>
+    </select><br>
+    </div>
+    <div>
+    <label> La latitude du deuxième point</label><br>
+    <input type="text" name="d2" placeholder="degree" required>
+    <input type="text" name="min2"  placeholder="minute" required> 
+    <input type="text" name="ss2" placeholder="seconde" required>
+    <select name="drc_lat_2" size="1">
+        <option value="1"> N </option>
+        <option value="-1"> S </option>
+    </select><br>
 
-    entrer latitude1 d : <input type="text" name="d" required>
-    entrer latitude1 min : <input type="text" name="min" required> 
-    entrer latitude1 ss : <input type="text" name="ss" required><br>
-    entrer longitude1 d : <input type="text" name="dlo" required>
-    entrer longitude1 min : <input type="text" name="minlo" required> 
-    entrer longitude1 ss : <input type="text" name="sslo" required><br>
-
-    entrer latitude2 d : <input type="text" name="d2" required>
-    entrer latitude2 min : <input type="text" name="min2" required> 
-    entrer latitude2 ss : <input type="text" name="ss2" required><br>
-    entrer longitude2 d : <input type="text" name="dlo2" required>
-    entrer longitude2 min : <input type="text" name="minlo2" required> 
-    entrer longitude2 ss : <input type="text" name="sslo2" required><br>
+    <label> La longitude du deuxième point</label><br>
+    <input type="text" name="dlo2"  placeholder="degree" required>
+    <input type="text" name="minlo2" placeholder="minute" required> 
+    <input type="text" name="sslo2"placeholder="seconde" required>
+    <select name="drc_long_2" size="1">
+        <option value="1" type="number "> E </option>
+        <option value="-1" type="number "> W </option>
+    </select><br>
+    </div>
+    </div>
 
    
     <input type="submit">
