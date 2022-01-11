@@ -4,8 +4,11 @@ var showForm = function(id){
   }
 </script>
 
-<button id= "citizenBtn" onclick="showForm('citizenForm')">citizen</button>
-<button id="police" onclick="showForm('policeForm')">police</button>
+<input  type= "radio" id= "c"  name="cit" value="cc" onclick="showForm('citizenForm')">
+<label for="c">citizen</label>
+
+<input type ="radio"id= "p"  name="cit" value="pp" onclick="showForm('policeForm')">
+<label for="p">police</label>
 
 <form id = "policeForm" action="" style="display:none">
     <input type="submit" value="Police Form">
@@ -14,4 +17,11 @@ var showForm = function(id){
     <input type="submit" value="Citizen Form">
   </form>
 
+
+   <input type="radio" id="html" name="fav_language" value="HTML">
+    <label for="html">HTML</label><br>
+    <input type="radio" id="css" name="fav_language" value="CSS">
+    <label for="css">CSS</label><br>
+    <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+    <label for="javascript">JavaScript</label>
   
