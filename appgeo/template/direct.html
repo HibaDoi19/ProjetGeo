@@ -6,9 +6,10 @@
         document.getElementById(id).style.display = '';
       }
 </script>
+<center> 
 
 <h1>Probléme Direct</h1>
-<form action ="http://127.0.0.1:8000/appgeo/resultd" >
+<form action ="http://127.0.0.1:8000/appgeo/resultd/"  >
 
     
         <label> choose a system</label>
@@ -34,28 +35,37 @@
         </SELECT><br>
         
    
-    entrer a : <input type="number" name="aa" value="0"><br> 
-    entrer b : <input type="number" name="bb" value="0"><br> 
+    <label>entrer a : </label>
+    <input type="number" name="aa" value="0"><br> 
+    <label>entrer b : </label>
+    <input type="number" name="bb" value="0"><br> 
 
-    
-    entrer latitude d : <input type="text" name="d" required>
-    entrer latitude min : <input type="text" name="min"required> 
-    entrer latitude ss : <input type="text" name="ss"required>
+    <label> La latitude du point de départ </label><br>
+    <input type="text" name="d" placeholder="degree" required>
+    <input type="text" name="min" placeholder="minute"required> 
+    <input type="text" name="ss" placeholder="seconde"required>
     <select name="drc_lat" size="1">
         <option value="1"> N </option>
         <option value="-1"> S </option>
     </select><br>
-    entrer longitude d : <input type="text" name="dlo" required>
-    entrer longitude min : <input type="text" name="minlo"required> 
-    entrer longitude ss : <input type="text" name="sslo"required>
+    <label> La longitude du point de départ </label><br>
+    <input type="text" name="dlo" placeholder="degree" required>
+    <input type="text" name="minlo" placeholder="minute"required>
+    <input type="text" name="sslo" placeholder="second" required>
     <select name="drc_long" size="1">
         <option value="1"> E </option>
         <option value="-1"> W </option>
     </select><br>
-    entrer azimut du point du départ en degres decimal : <input type="text" name="az" required><br> 
-    entrer la distance géodesique en métre : <input type="text" name="s" required><br>
+
+    <label>entrer azimut du point du départ en degres decimal : </label><br>
+    <input type="text" name="az" required><br> 
+    <label> la distance géodesique en métre :</label><br>
+    <input type="text" name="s" required><br>
    
-    <input type="submit">
+    <button type="submit" >Calculer</button>
+
+    
+</center>
     
 </form>
 

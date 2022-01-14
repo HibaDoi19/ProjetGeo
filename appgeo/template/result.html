@@ -1,8 +1,18 @@
 {% extends 'base.html' %} 
 {%block content%} 
-result1 :{{result1}}
-result1 :{{result2}}
-result1 :{{result3}}
+<h2>result1 :{{result1}}</h2>
+<h2>result1 :{{result2}}</h2>
+<h2>result1 :{{result3}}</h2>
+
+    <div class="row" >
+
+    <h2 class="visualisation">Visualisation</h2>
+      <script scr="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      
+          {{plot|safe}}
+        
+      
+    </div>
 
 
 {%endblock%} 

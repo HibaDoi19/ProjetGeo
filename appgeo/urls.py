@@ -5,8 +5,8 @@ urlpatterns =[
     path('resultd/',views.add),
     path('inverse/', views.say_hello2),
     path('resul/', views.inverse),
-    path('acceuil/', views.acceuil),
-    path('essaiA/', views.essaiA ),
-    path('essaiB/',views.essaiB)
+    path('acceuil/', views.acceuil,name='acceuil'),
+    #path('essaiA/', views.essaiA ),
+    #path('essaiB/',views.essaiB)
 
 ]
