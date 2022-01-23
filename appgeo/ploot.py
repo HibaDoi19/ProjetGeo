@@ -120,7 +120,7 @@ def directe(latitude1, longitude1, alpha1, s, a, b):
                         if ( alpha2 > pi ) :
                                 alpha21 = alpha2 - pi
 
-                return longitude2, latitude2, alpha2
+                return longitude2,latitude2,alpha2
 
 
 
@@ -140,7 +140,7 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):
 
                 fig.update_traces(contours_z=dict(show=True, usecolormap=True,highlightcolor="limegreen", project_z=True))
 
-                x,y,z=visualisation(longitude1 , latitude1,alpha1,s,a,b)
+                x,y,z=visualisation(longitude1,latitude1,alpha1,s,a,b)
 
                 fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'red'})
 

@@ -5,23 +5,175 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>géodésique</title>
-    <style>
-       .cont{
-          padding-top: 2rem;
-          padding-bottom: 2rem;
-          padding-left: 1rem;
-          margin-left: 30%;
-          margin-right: 30%;
-          background-color:  #72705B ;
-          font-weight: bold;
-          color: white;
-          border-radius: 10px;
+<script>
+      function check () {
+        // (C1) INIT
+        var valid = true, error = "", field = "";
+      
+        // (C2) a
+        field = document.getElementById("fa");
+        error = document.getElementById("ca");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "a  doit être positif  \r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
         }
+      
+        // (C3) b
+        field = document.getElementById("fb");
+        error = document.getElementById("cb");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "b doit être positif etinférieur à a\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }
+        // (C4) s
+        field = document.getElementById("fs");
+        error = document.getElementById("cs");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "erreur, distance doit être positive\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }
+        // (C5) ALPHA1
+        field = document.getElementById("faz");
+        error = document.getElementById("caz");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "Erreur : azimut doit être entre 0° et 360°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }
+        // (C6) Latitude Degree
+        field = document.getElementById("flatd");
+        error = document.getElementById("clatd");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 89°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }      
+        // (C7) Latitude min
+        field = document.getElementById("flatm");
+        error = document.getElementById("clatm");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 59°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }    
+        // (C8) Latitude second
+        field = document.getElementById("flats");
+        error = document.getElementById("clats");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 60°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }  
+        // (C9) Longitude Degree
+        field = document.getElementById("flod");
+        error = document.getElementById("clod");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 89°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }      
+        // (C10) Latitude min
+        field = document.getElementById("flom");
+        error = document.getElementById("clom");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 59°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }    
+        // (C12) Latitude second
+        field = document.getElementById("flos");
+        error = document.getElementById("clos");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 60°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }  
+        // (C13) RESULT
+        return valid;
+      }
+</script>
+<style>
+
+  label, input, button ,select{
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+  }
+  button {
+    margin-top: 20px;
+    background: #1DA1F2;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 900;
+    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+    transition: 0.5s;
+  }
+
+  input , select {
+    background: #ecf0f3;
+    padding: 10px;
+    padding-left: 20px;
+    height: 50px;
+    font-size: 14px;
+    border-radius: 50px;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+  }
+  label {
+    margin-bottom: 4px;
+  }
+
+      .err { background: #ffe6ee; border: 1px solid #b1395f; }
+      .emsg { color: #c12020; font-weight: bold; }
+    
+       
         .ccst{
           height: 4.3rem;
           font-size: 2rem;
         }
-        .box{display:flex} 
+        .box{display:flex;
+        width: 100 px;
+        justify-content : space-around;
+        margin : 0 5px 
+        
+      }
+
         .plot{
           position: absolute;
           height: 800px;

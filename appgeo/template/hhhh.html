@@ -1,4 +1,4 @@
-<script>
+<!--<script>
 var showForm = function(id){
     document.getElementById(id).style.display = '';
   }
@@ -23,5 +23,64 @@ var showForm = function(id){
     <input type="radio" id="css" name="fav_language" value="CSS">
     <label for="css">CSS</label><br>
     <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-    <label for="javascript">JavaScript</label>
+    <label for="javascript">JavaScript</label>-->
+   <!-- (A) SOME SIMPLE ERROR STYLES -->
+<html>
+   <body>
+<style>
+  .err { background: #ffe6ee; border: 1px solid #b1395f; }
+  .emsg { color: #c12020; font-weight: bold; }
+  </style>
+   
+  <!-- (B) HTML FORM -->
+  <form onsubmit="return check()" novalidate>
+    Name 
+    <input type="text" name="fname" id="fname" 
+           required minlength="2" maxlength="8"/> 
+    <div id="cname" class="emsg"></div> <br>
+   
+    Number 
+    <input type="number" name="fnumber" id="fnumber"
+           required min="1" max="12"/> 
+    <div id="cnumber" class="emsg"></div> <br>
+   
+    <input type="submit" value="Go!"/>
+  </form>
+   
+  <!-- (C) FORM CHECK -->
+  <script>
+  function check () {
+    // (C1) INIT
+    var valid = true, error = "", field = "";
+  
+    // (C2) NAME
+    field = document.getElementById("fname");
+    error = document.getElementById("cname");
+    if (!field.checkValidity()) {
+      valid = false;
+      field.classList.add("err");
+      error.innerHTML = "Name must be 2-4 characters\r\n";
+    } else {
+      field.classList.remove("err");
+      error.innerHTML = "";
+    }
+  
+    // (C3) NUMBER
+    field = document.getElementById("fnumber");
+    error = document.getElementById("cnumber");
+    if (!field.checkValidity()) {
+      valid = false;
+      field.classList.add("err");
+      error.innerHTML = "Num must be between 1-12\r\n";
+    } else {
+      field.classList.remove("err");
+      error.innerHTML = "";
+    }
+  
+    // (C4) RESULT
+    return valid;
+  }
+  </script>
+</body>
+</html>
   

@@ -7,7 +7,7 @@
 
 
 
-<form action ="http://127.0.0.1:8000/appgeo/resul" >
+<form action ="http://127.0.0.1:8000/appgeo/resul"  onsubmit="return check()" novalidate>
     
  
 
@@ -31,15 +31,18 @@
     <option  value="16"> Clarke 1886</option>
     <option  value="17"> Bessel 1841</option>
     <option  value="18"> Airy 1830</option>
-    </SELECT>
+    </SELECT><br>
     
     
 
-    <h4 class="cont">Or enter a and b values <small>(en m)</small></h4 class="cont">
+    
         <label> la valeur de a</label>
-        <input type="number" name="aa" value="0" >
+        <input type="number" name="aa" value="0" min="0" id="fa" ><br>
+        <div id="ca" class="emsg"></div> <br>
+
         <label> la valeur de b</label>
-        <input type="number" name="bb"value="0" ><br> 
+        <input type="number" name="bb"value="0"  min="0" id="fb"><br> 
+        <div id="ca" class="emsg"></div> <br>
    
     
     
@@ -47,17 +50,17 @@
     <div class="box">
     <div>
     <label> La latitude du premier point</label><br>
-    <input type="text" name="d" placeholder="degree" required>
-    <input type="text" name="min" placeholder="minute" required> 
-    <input type="text" name="ss"placeholder="seconde" required>
+    <input type="number" name="d" placeholder="degree" min="0" max="89" required>
+    <input type="number" name="min" placeholder="minute" min="0" max="60" required> 
+    <input type="number" name="ss"placeholder="seconde"  required>
     <select name="drc_lat_1" size="1">
         <option value="1"> N </option>
         <option value="-1"> S </option>
     </select><br>
     <label> La longitude du premier point</label><br>
-    <input type="text" name="dlo" placeholder="degree" required>
-    <input type="text" name="minlo" placeholder="minute" required> 
-    <input type="text" name="sslo" placeholder="seconde"required>
+    <input type="number" name="dlo" placeholder="degree" required>
+    <input type="number" name="minlo" placeholder="minute" required> 
+    <input type="number" name="sslo" placeholder="seconde"required>
     <select name="drc_long_1" size="1">
         <option value="1"> E </option>
         <option value="-1"> W </option>
@@ -65,18 +68,18 @@
     </div>
     <div>
     <label> La latitude du deuxième point</label><br>
-    <input type="text" name="d2" placeholder="degree" required>
-    <input type="text" name="min2"  placeholder="minute" required> 
-    <input type="text" name="ss2" placeholder="seconde" required>
+    <input type="number" name="d2" placeholder="degree" required>
+    <input type="number" name="min2"  placeholder="minute" required> 
+    <input type="number"name="ss2" placeholder="seconde" required>
     <select name="drc_lat_2" size="1">
         <option value="1"> N </option>
         <option value="-1"> S </option>
     </select><br>
 
     <label> La longitude du deuxième point</label><br>
-    <input type="text" name="dlo2"  placeholder="degree" required>
-    <input type="text" name="minlo2" placeholder="minute" required> 
-    <input type="text" name="sslo2"placeholder="seconde" required>
+    <input type="number" name="dlo2"  placeholder="degree" required>
+    <input type="number" name="minlo2" placeholder="minute" required> 
+    <input type="number" name="sslo2"placeholder="seconde" required>
     <select name="drc_long_2" size="1">
         <option value="1" type="number "> E </option>
         <option value="-1" type="number "> W </option>
@@ -85,7 +88,7 @@
     </div>
 
    
-    <input type="submit">
+    <input type="submit"  value="Go!">
 
     
 </form>

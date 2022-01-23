@@ -1,4 +1,15 @@
 {% extends 'base.html' %} 
 {%block content%} 
-result :{{result}}
+l'azimut direct :{{ALPHA12}}
+l'azimut inverse :{{ALPHA21}}
+la distance géodesique  :{{s}}
+<div class="row" >
+
+    <h2 class="visualisation">Visualisation</h2>
+      <script scr="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      
+          {{plot|safe}}
+        
+      
+    </div>
 {%endblock%} 

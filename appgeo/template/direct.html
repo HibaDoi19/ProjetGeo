@@ -7,10 +7,13 @@
       }
 </script>
 <center> 
-
+<div >
+    
 <h1>Probléme Direct</h1>
-<form action ="http://127.0.0.1:8000/appgeo/resultd/"  >
+<form action ="http://127.0.0.1:8000/appgeo/resultd/"   onsubmit="return check()" novalidate>
 
+    <div class="box">
+        <div>
     
         <label> choose a system</label>
         <select name="sys" size="1">
@@ -33,41 +36,83 @@
         <option  value="17"> Bessel 1841
         <option  value="18"> Airy 1830
         </SELECT><br>
+        </div>
+    </div>
         
-   
+    <div class="box">
+        <div>
     <label>entrer a : </label>
-    <input type="number" name="aa" value="0"><br> 
+    <input type="number" name="aa" value="0" min="0"  id="fa" ><br> 
+    <div id="ca" class="emsg"></div> <br>
+        </div>
+        <div>
     <label>entrer b : </label>
-    <input type="number" name="bb" value="0"><br> 
+    <input type="number" name="bb" value="0" min="0" id="fb" ><br> 
+    <div id="cb" class="emsg"></div> <br>
+</div>
+    </div>
 
+    <div class="box">
+        <div >
     <label> La latitude du point de départ </label><br>
-    <input type="text" name="d" placeholder="degree" required>
-    <input type="text" name="min" placeholder="minute"required> 
-    <input type="text" name="ss" placeholder="seconde"required>
+    
+    
+    <input type="number" name="d" placeholder="degree" min="0" max="89" id="flatd"   required>
+    <input type="number" name="min" placeholder="minute"min="0" max="59"  id ="flatm" required> 
+    <input type="number" name="ss" placeholder="seconde"min="0" max="60"  id="flats" required>
+    
+    
     <select name="drc_lat" size="1">
         <option value="1"> N </option>
         <option value="-1"> S </option>
     </select><br>
+    <div id="clatd" class="emsg"></div> <br>
+    <div id="clatm" class="emsg"></div> <br>
+    <div id="clats" class="emsg"></div> <br>
+        </div> 
+    
+    
+    
+
+<div>
+
     <label> La longitude du point de départ </label><br>
-    <input type="text" name="dlo" placeholder="degree" required>
-    <input type="text" name="minlo" placeholder="minute"required>
-    <input type="text" name="sslo" placeholder="second" required>
+    <input type="number" name="dlo" placeholder="degree" min="0" max="89"  id="flod" required>
+    <input type="number" name="minlo" placeholder="minute" min="0" max="60"  id="flom" required>
+    <input type="number" name="sslo" placeholder="second"min="0" max="59" id="flos" required>
     <select name="drc_long" size="1">
         <option value="1"> E </option>
         <option value="-1"> W </option>
     </select><br>
+    <div id="clod" class="emsg"></div> <br>
+    <div id="clom" class="emsg"></div> <br>
+    <div id="clos" class="emsg"></div> <br>
+</div>
+    </div>
+    <div class="box">
+        <div>
 
     <label>entrer azimut du point du départ en degres decimal : </label><br>
-    <input type="text" name="az" required><br> 
+    <input type="number" name="az" min="0" max="360" id="faz" required><br> 
+    <div id="caz" class="emsg"></div> <br>
+        </div>
+<div>
     <label> la distance géodesique en métre :</label><br>
-    <input type="text" name="s" required><br>
-   
-    <button type="submit" >Calculer</button>
+    <input type="number" name="s"  min="0" id="fs" required><br>
+    <div id="cs" class="emsg"></div> <br>
+</div>
+</div>
 
-    
+<div class="box">
+    <div>
+    <button type="submit" value="Go!" >Calculer et visualiser </button>   
+    </div>
+</div>
 </center>
     
 </form>
+
+</div>
 
 {% endblock %}
 
