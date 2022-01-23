@@ -1,13 +1,14 @@
 {% extends 'base.html' %} 
 {%block content%} 
-<h1>la longitude d'arrivée</h1>
-<h2>{{longituded}} {{longitudem}} {{longitudes}}</h2>
+<center>
+<label>la longitude d'arrivée</label>
+<input value="{{longituded}} {{longitudem}} {{longitudes}}">
 
-<h1>la latitude d'arrivée</h1>
-<h2>{{latituded}} {{latitudem}} {{latitudes}}</h2>
+<label>la latitude d'arrivée </label>
+<input value="{{latituded}} {{latitudem}} {{latitudes}}">
 
-<h1>AZHIMUT</h1>
-<h2>{{angle_azhimutale}}</h2>
+<label>AZHIMUT </label>
+<input value="{{angle_azhimutale}}">
 
 
     <div class="row" >
@@ -19,6 +20,7 @@
         
       
     </div>
+</center>
 
 
 {%endblock%} 

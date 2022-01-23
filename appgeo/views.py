@@ -17,7 +17,7 @@ import logging
 import os
 from . import ploot
 from . import direct 
-from . import inverse
+from . import innverse
 
 def say_hello(request):
         return render(request ,'direct.html')
@@ -246,7 +246,7 @@ def inverse(request):
         lam1=lam1*drc_long_1
         lam2=lam2*drc_long_2
         
-        xx,yy,zz=inverse.inversee(phi1,phi2,lam1,lam2,x,y)
+        xx,yy,zz=innverse.inversee(phi1,phi2,lam1,lam2,x,y)
         xx=float(xx)
         yy=float(yy)
         zz=float(zz)
