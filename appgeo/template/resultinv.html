@@ -1,8 +1,23 @@
 {% extends 'base.html' %} 
 {%block content%} 
-l'azimut direct :{{ALPHA12}}
-l'azimut inverse :{{ALPHA21}}
-la distance géodesique  :{{s}}
+<center>
+    <h1 > Résultat du Probléme inverse</h1>
+    <div class="box">
+        <div>
+        <label>l'azimut direct :</label>
+        <input value="{{ALPHA12}}">
+        </div>
+        <div>
+        <label>l'azimut inverse :</label>
+        <input value="{{ALPHA21}}">
+        </div>
+        <div>
+        <label>la distance géodesique </label>
+        <input value="{{s}}">
+         </div>
+        </div>
+
+ 
 <div class="row" >
 
     <h2 class="visualisation">Visualisation</h2>
@@ -12,4 +27,5 @@ la distance géodesique  :{{s}}
         
       
     </div>
+</center>
 {%endblock%} 

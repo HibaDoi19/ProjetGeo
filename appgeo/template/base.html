@@ -1,6 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <div>
+    <form>
+      <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+  <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+  <div id="chartdiv"></div>
+  <script>
+    // Themes begin
+  am4core.useTheme(am4themes_animated);
+  // Themes end
+  
+  var chart = am4core.create("chartdiv", am4maps.MapChart);
+  
+  // Set map definition
+  chart.geodata = am4geodata_worldLow;
+  
+  // Set projection
+  chart.projection = new am4maps.projections.Orthographic();
+  chart.panBehavior = "rotateLongLat";
+  chart.deltaLatitude = -20;
+  chart.padding(20,20,20,20);
+  
+  // Create map polygon series
+  var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+  
+  // Make map load polygon (like country names) data from GeoJSON
+  polygonSeries.useGeodata = true;
+  //polygonSeries.include = ["BR", "UA", "MX", "CI"];
+  
+  // Configure series
+  var polygonTemplate = polygonSeries.mapPolygons.template;
+  polygonTemplate.tooltipText = "{name}";
+  polygonTemplate.fill = am4core.color("#FF6633");
+  polygonTemplate.stroke = am4core.color("#000033");
+  polygonTemplate.strokeWidth = 0.5;
+  polygonTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+  polygonTemplate.url = "https://www.datadrum.com/main.php?package={id}";
+  polygonTemplate.urlTarget = "_blank";
+  
+  var graticuleSeries = chart.series.push(new am4maps.GraticuleSeries());
+  graticuleSeries.mapLines.template.line.stroke = am4core.color("#ffffff");
+  graticuleSeries.mapLines.template.line.strokeOpacity = 0.08;
+  graticuleSeries.fitExtent = false;
+  
+  
+  chart.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 0.1;
+  chart.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color("#ffffff");
+  
+  // Create hover state and set alternative fill color
+  var hs = polygonTemplate.states.create("hover");
+  hs.properties.fill = chart.colors.getIndex(0).brighten(-0.5);
+  
+  let animation;
+  setTimeout(function(){
+  animation = chart.animate({property:"deltaLongitude", to:100000}, 20000000);
+  }, 3000)
+  
+  chart.seriesContainer.events.on("down", function(){
+  //  animation.stop();
+  })
+  </script>
+    </form>
+  </div>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,6 +190,22 @@
       }
 </script>
 <style>
+  .brand-title,label {
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: #F2D096;
+    
+    font-family:Georgia, 'Times New Roman', Times, serif;
+  }
+  h1,h2  {
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: #8FB9AA;
+    
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 
   label, input, button ,select{
     display: block;
@@ -145,6 +225,12 @@
     box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
     transition: 0.5s;
   }
+  body {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+      url(https://images.pexels.com/photos/41953/earth-blue-planet-globe-planet-41953.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500)
+        no-repeat center center/cover;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
   input , select {
     background: #ecf0f3;
@@ -158,6 +244,7 @@
   label {
     margin-bottom: 4px;
   }
+
 
       .err { background: #ffe6ee; border: 1px solid #b1395f; }
       .emsg { color: #c12020; font-weight: bold; }
@@ -181,11 +268,15 @@
       </style>
 </head>
 
-<body bgcolor=#A7C4B5>
+<body bgcolor=#304D63>
  {%block content%}  
 
  
  {%endblock%}
 </body >
+
+<footer>
+  <a href="https://github.com/HibaDoi19/ProjetGeo"> github code </a>
+</footer>
 
 </html>

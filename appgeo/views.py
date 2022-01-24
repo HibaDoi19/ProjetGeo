@@ -250,7 +250,7 @@ def inverse(request):
         xx=float(xx)
         yy=float(yy)
         zz=float(zz)
-        return render( request ,'resultinv.html', {'ALPHA12': xx,'ALPHA21': yy,'s': zz ,'plot':ploot.ellipsoide(phi1*pi/180,lam1*pi/180, xx*pi/180, zz, x, y)})
+        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(phi1*pi/180,lam1*pi/180, xx*pi/180, zz, x, y)})
 
 
         

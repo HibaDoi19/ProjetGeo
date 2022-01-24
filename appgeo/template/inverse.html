@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<center>
 
 <h1>Probléme Inverse</h1>
 
@@ -9,7 +10,8 @@
 
 <form action ="http://127.0.0.1:8000/appgeo/resul"  onsubmit="return check()" novalidate>
     
- 
+    <div class="box">
+        <div>
 
     <label> choose a system</label>
     <select name="sys" size="1">
@@ -32,17 +34,25 @@
     <option  value="17"> Bessel 1841</option>
     <option  value="18"> Airy 1830</option>
     </SELECT><br>
+        </div>
     
+    </div>
+    <div class="box">
+        <div>
     
 
     
         <label> la valeur de a</label>
         <input type="number" name="aa" value="0" min="0" id="fa" ><br>
         <div id="ca" class="emsg"></div> <br>
+        </div>
+        <div>
 
         <label> la valeur de b</label>
         <input type="number" name="bb"value="0"  min="0" id="fb"><br> 
         <div id="ca" class="emsg"></div> <br>
+    </div>
+</div>
    
     
     
@@ -88,8 +98,13 @@
     </div>
 
    
-    <input type="submit"  value="Go!">
+    <div class="box">
+        <div>
+        <button type="submit" value="Go!" >Calculer et visualiser </button>   
+        </div>
+    </div>
 
     
 </form>
+</center>
 {% endblock %}
