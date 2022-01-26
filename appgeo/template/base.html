@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script scr="erreur.js"></script>
   <div>
     <form>
       <script src="https://www.amcharts.com/lib/4/core.js"></script>
@@ -188,7 +189,170 @@
         // (C13) RESULT
         return valid;
       }
+      function checck () {
+        // (C1) INIT
+        var valid = true, error = "", field = "";
+        // (C6) a inverse
+        field = document.getElementById("finv_a");
+        error = document.getElementById("cinv_a");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "a  doit être positif \r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        } 
+        // (C6) b inverse
+        field = document.getElementById("finv_b");
+        error = document.getElementById("cinv_b");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "b  doit être positif \r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }  
+        // (C6) Latitude Degree premier point
+        field = document.getElementById("flatd1i");
+        error = document.getElementById("clatd1i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 89°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }  
+        // (C6) Latitude minute premier point
+        field = document.getElementById("flatm1i");
+        error = document.getElementById("clatm1i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 59°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        } 
+        // (C6) Latitude second premier point
+        field = document.getElementById("flats1i");
+        error = document.getElementById("clats1i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 60°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }
+        // (C6) Longitude Degree premier point
+        field = document.getElementById("flongd1i");
+        error = document.getElementById("clongd1i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 89°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }   
+        // (C6) Longitude minute premier point
+        field = document.getElementById("flongm1i");
+        error = document.getElementById("clongm1i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 59°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }     
+        // (C6) Longitude second premier point
+        field = document.getElementById("flongs1i");
+        error = document.getElementById("clongs1i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 60°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }      
+        // (C6) Latitude Degree deusieme point
+        field = document.getElementById("flatd2i");
+        error = document.getElementById("clatd2i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 89°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }   
+        // (C6) Latitude minute deusieme point
+        field = document.getElementById("flatm2i");
+        error = document.getElementById("clatm2i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 59°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }     
+        // (C6) Latitude second deusieme point
+        field = document.getElementById("flats2i");
+        error = document.getElementById("clats2i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 60°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }  
+        // (C6) Longitude Degree 2 point
+        field = document.getElementById("flongd2i");
+        error = document.getElementById("clongd2i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 89°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }   
+        // (C6) Longitude minute premier point
+        field = document.getElementById("flongm2i");
+        error = document.getElementById("clongm2i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 59°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        }     
+        // (C6) Longitude second premier point
+        field = document.getElementById("flongs2i");
+        error = document.getElementById("clongs2i");
+        if (!field.checkValidity()) {
+          valid = false;
+          field.classList.add("err");
+          error.innerHTML = "valeur doit etre entre 0° et 60°\r\n";
+        } else {
+          field.classList.remove("err");
+          error.innerHTML = "";
+        } 
+        
+        // (C14) RESULT
+        return valid;
+      }
+  
 </script>
+
 <style>
   .brand-title,label {
     margin-top: 10px;

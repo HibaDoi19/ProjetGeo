@@ -1,101 +1,122 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <center>
+<div>
 
 <h1>Probléme Inverse</h1>
-
-
-
-
-<form action ="http://127.0.0.1:8000/appgeo/resul"  onsubmit="return check()" novalidate>
+<form action ="http://127.0.0.1:8000/appgeo/resul"  onsubmit="return checck()" novalidate>
     
     <div class="box">
         <div>
 
-    <label> choose a system</label>
-    <select name="sys" size="1">
-    <option  value="1"> WGS 84</option>
-    <option  value="2"> WGS 72</option>
-    <option  value="3"> WGS 66</option>
-    <option  value="4"> WGS 60</option>
-    <option  value="5"> South American 1969</option>
-    <option  value="6"> Krassovsky 1940</option>
-    <option  value="7"> International</option>
-    <option  value="8"> Hough 1956</option>
-    <option  value="9"> G R S 1980</option>
-    <option  value="10"> G R S 1975</option>
-    <option  value="11"> G R S 1967</option>
-    <option  value="12"> Fischer 1968</option>
-    <option  value="13"> Fischer 1960</option>
-    <option  value="14"> Everest 1830</option>
-    <option  value="15"> Clarke 1880</option>
-    <option  value="16"> Clarke 1886</option>
-    <option  value="17"> Bessel 1841</option>
-    <option  value="18"> Airy 1830</option>
-    </SELECT><br>
+        <label>choisir un ellipsoide</label>
+        <select name="sys" size="1">
+        <option  value="1"> WGS 84</option>
+        <option  value="2"> WGS 72</option>
+        <option  value="3"> WGS 66</option>
+        <option  value="4"> WGS 60</option>
+        <option  value="5"> South American 1969</option>
+        <option  value="6"> Krassovsky 1940</option>
+        <option  value="7"> International</option>
+        <option  value="8"> Hough 1956</option>
+        <option  value="9"> G R S 1980</option>
+        <option  value="10"> G R S 1975</option>
+        <option  value="11"> G R S 1967</option>
+        <option  value="12"> Fischer 1968</option>
+        <option  value="13"> Fischer 1960</option>
+        <option  value="14"> Everest 1830</option>
+        <option  value="15"> Clarke 1880</option>
+        <option  value="16"> Clarke 1886</option>
+        <option  value="17"> Bessel 1841</option>
+        <option  value="18"> Airy 1830</option>
+        </SELECT><br>
         </div>
-    
     </div>
+
     <div class="box">
         <div>
-    
-
-    
         <label> la valeur de a</label>
-        <input type="number" name="aa" value="0" min="0" id="fa" ><br>
-        <div id="ca" class="emsg"></div> <br>
+        <input type="number" name="aa" value="0" min="0" id="finv_a" ><br>
+        <div id="cinv_a" class="emsg"></div> <br>
         </div>
-        <div>
 
+        <div>
         <label> la valeur de b</label>
-        <input type="number" name="bb"value="0"  min="0" id="fb"><br> 
-        <div id="ca" class="emsg"></div> <br>
+        <input type="number" name="bb"value="0"  min="0" id="finv_b"><br> 
+        <div id="cinv_b" class="emsg"></div> <br>
+        </div>
     </div>
-</div>
    
     
-    
-    
     <div class="box">
-    <div>
-    <label> La latitude du premier point</label><br>
-    <input type="number" name="d" placeholder="degree" min="0" max="89" required>
-    <input type="number" name="min" placeholder="minute" min="0" max="60" required> 
-    <input type="number" name="ss"placeholder="seconde"  required>
-    <select name="drc_lat_1" size="1">
-        <option value="1"> N </option>
-        <option value="-1"> S </option>
-    </select><br>
-    <label> La longitude du premier point</label><br>
-    <input type="number" name="dlo" placeholder="degree" required>
-    <input type="number" name="minlo" placeholder="minute" required> 
-    <input type="number" name="sslo" placeholder="seconde"required>
-    <select name="drc_long_1" size="1">
-        <option value="1"> E </option>
-        <option value="-1"> W </option>
-    </select><br>
-    </div>
-    <div>
-    <label> La latitude du deuxième point</label><br>
-    <input type="number" name="d2" placeholder="degree" required>
-    <input type="number" name="min2"  placeholder="minute" required> 
-    <input type="number"name="ss2" placeholder="seconde" required>
-    <select name="drc_lat_2" size="1">
-        <option value="1"> N </option>
-        <option value="-1"> S </option>
-    </select><br>
+        <div>
+        <label> La latitude du premier point</label><br>
 
-    <label> La longitude du deuxième point</label><br>
-    <input type="number" name="dlo2"  placeholder="degree" required>
-    <input type="number" name="minlo2" placeholder="minute" required> 
-    <input type="number" name="sslo2"placeholder="seconde" required>
-    <select name="drc_long_2" size="1">
-        <option value="1" type="number "> E </option>
-        <option value="-1" type="number "> W </option>
-    </select><br>
+
+        <input type="number" name="d" placeholder="degree" min="0" max="89" id="flatd1i" required>
+        <input type="number" name="min" placeholder="minute" min="0" max="59" id= "flatm1i" required> 
+        <input type="number" name="ss"placeholder="seconde" min="0" max="60" id="flats1i" required>
+
+
+        <select name="drc_lat_1" size="1">
+            <option value="1"> N </option>
+            <option value="-1"> S </option>
+        </select><br>
+        <div id="clatd1i" class="emsg"></div> <br>
+        <div id="clatm1i" class="emsg"></div> <br>
+        <div id="clats1i" class="emsg"></div> <br>
+        </div>
+
+        <div>
+        <label> La longitude du premier point</label><br>
+        <input type="number" name="dlo" placeholder="degree" min="0" max="89" id="flongd1i" required>
+        <input type="number" name="minlo" placeholder="minute"min="0" max="59" id= "flongm1i" required> 
+        <input type="number" name="sslo" placeholder="seconde" min="0" max="60" id="flongs1i" required>
+        <select name="drc_long_1" size="1">
+            <option value="1"> E </option>
+            <option value="-1"> W </option>
+        </select><br>
+        <div id="clongd1i" class="emsg"></div> <br>
+        <div id="clongm1i" class="emsg"></div> <br>
+        <div id="clongs1i" class="emsg"></div> <br>
+        </div>
     </div>
+
+    <div class="box">
+        <div>
+        <label> La latitude du deuxième point</label><br>
+        <input type="number" name="d2" placeholder="degree" min="0" max="89" id="flatd2i"required>
+        <input type="number" name="min2"  placeholder="minute" min="0" max="89" id="flatm2i" required> 
+        <input type="number"name="ss2" placeholder="seconde" min="0" max="89" id="flats2i" required>
+        <select name="drc_lat_2" size="1">
+            <option value="1"> N </option>
+            <option value="-1"> S </option>
+        </select><br>
+        <div id="clatd2i" class="emsg"></div> <br>
+        <div id="clatm2i" class="emsg"></div> <br>
+        <div id="clats2i" class="emsg"></div> <br>
+        </div>
+        
+        
+        <div>
+
+        <label> La longitude du deuxième point</label><br>
+        <input type="number" name="dlo2"  placeholder="degree" min="0" max="89" id="flongd2i" required>
+        <input type="number" name="minlo2" placeholder="minute" min="0" max="59" id="flongm2i"required> 
+        <input type="number" name="sslo2"placeholder="seconde" min="0" max="60" id="flongs2i"required>
+        <select name="drc_long_2" size="1">
+            <option value="1" type="number "> E </option>
+            <option value="-1" type="number "> W </option>
+        </select><br>
+        <div id="clongd2i" class="emsg"></div> <br>
+        <div id="clongm2i" class="emsg"></div> <br>
+        <div id="clongs2i" class="emsg"></div> <br>
+        
+        </div>
     </div>
+
 
    
     <div class="box">
@@ -105,6 +126,8 @@
     </div>
 
     
-</form>
+
 </center>
+</div>
+<script scr="/erreurinv.js"></script>
 {% endblock %}

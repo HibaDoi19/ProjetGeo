@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<script>
-    var showForm = function(id){
-        document.getElementById(id).style.display = '';
-      }
-</script>
+
+
 <center> 
-<div >
+<div>
     
 <h1>Probléme Direct</h1>
 <form action ="http://127.0.0.1:8000/appgeo/resultd/"   onsubmit="return check()" novalidate>
@@ -15,7 +12,7 @@
     <div class="box">
         <div>
     
-        <label> choose a system</label>
+        <label>choisir un ellipsoide</label>
         <select name="sys" size="1">
         <option  value="1"> WGS 84
         <option  value="2"> WGS 72
@@ -41,19 +38,19 @@
         
     <div class="box">
         <div>
-    <label>entrer a : </label>
-    <input type="number" name="aa" value="0" min="0"  id="fa" ><br> 
-    <div id="ca" class="emsg"></div> <br>
+        <label>entrer a : </label>
+        <input type="number" name="aa" value="0" min="0"  id="fa" ><br> 
+        <div id="ca" class="emsg"></div> <br>
         </div>
         <div>
-    <label>entrer b : </label>
-    <input type="number" name="bb" value="0" min="0" id="fb" ><br> 
-    <div id="cb" class="emsg"></div> <br>
-</div>
+        <label>entrer b : </label>
+        <input type="number" name="bb" value="0" min="0" id="fb" ><br> 
+        <div id="cb" class="emsg"></div> <br>
+        </div>
     </div>
 
     <div class="box">
-        <div >
+        <div>
     <label> La latitude du point de départ </label><br>
     
     
@@ -78,8 +75,8 @@
 
     <label> La longitude du point de départ </label><br>
     <input type="number" name="dlo" placeholder="degree" min="0" max="89"  id="flod" required>
-    <input type="number" name="minlo" placeholder="minute" min="0" max="60"  id="flom" required>
-    <input type="number" name="sslo" placeholder="second"min="0" max="59" id="flos" required>
+    <input type="number" name="minlo" placeholder="minute" min="0" max="59"  id="flom" required>
+    <input type="number" name="sslo" placeholder="second"min="0" max="60" id="flos" required>
     <select name="drc_long" size="1">
         <option value="1"> E </option>
         <option value="-1"> W </option>
@@ -108,9 +105,10 @@
     <button type="submit" value="Go!" >Calculer et visualiser </button>   
     </div>
 </div>
+
 </center>
     
-</form>
+
 
 </div>
 
