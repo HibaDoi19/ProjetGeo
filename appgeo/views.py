@@ -18,6 +18,7 @@ import os
 from . import ploot
 from . import direct 
 from . import innverse
+from . import geocentrique2geodesique
 
 def say_hello(request):
         return render(request ,'direct.html')
@@ -48,6 +49,11 @@ def add(request):
 
                 drc_lat=int(request.GET["drc_lat"])
                 drc_long=int(request.GET["drc_long"])
+
+                X_centrique= request.GET["cx"]
+                Y_centrique= request.GET["cy"]
+                Z_centrique= request.GET["cz"]
+
 
                 systeme=request.GET['sys']
                 if systeme =="1":
@@ -112,6 +118,24 @@ def add(request):
                         y=bb
                 latitude1=latitude1*drc_lat
                 longitude1=longitude1*drc_long
+
+                long_des,lat_des,h_des=geocentrique2geodesique.geocentrique2geodesique(X_centrique,Y_centrique,Z_centrique,x,y)
+                long_des=long_des*pi/180
+                lat_des=lat_des*pi/180
+
+                systeme=request.GET["multi_note"]
+                if systeme =="1":
+                        latitude1=latitude1
+                        longitude1=longitude1
+
+                                
+                elif systeme =="2":
+                        latitude1=lat_des
+                        longitude1=long_des
+
+                                
+
+
                 #if request.methode =="post" and "Calculer" in request.POST :
                 res1,res2,res3=direct.direct(latitude1, longitude1, alpha1, s, x, y)
                 long_d=(int(res1))
@@ -131,7 +155,7 @@ def add(request):
                         hh="N"
                 else :
                         hh="S"
-                        lat_d=abs(long_d)
+                        lat_d=abs(lat_d)
                         lat_m=abs(lat_m)
                         lat_s=abs(lat_s)
 
@@ -250,7 +274,7 @@ def inverse(request):
         xx=float(xx)
         yy=float(yy)
         zz=float(zz)
-        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
-        #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(phi1*pi/180,lam1*pi/180, xx*pi/180, zz, x, y)})
+        #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
+        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(lam1,phi1, xx*pi/180, zz, x, y)})
 
         

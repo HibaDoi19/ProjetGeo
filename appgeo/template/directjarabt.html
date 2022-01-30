@@ -13,20 +13,8 @@
     
 <h1>Probléme Direct</h1>
 <form action ="http://127.0.0.1:8000/appgeo/resultd/"   onsubmit="return check()" novalidate>
-    <div class="box">
-        <div>
-    <label class="container">personnaliser un ellipsoide
-     <input type="checkbox" class="state" name="multi_note" value="1" onclick="showMe('div1', this)" >
-     <span class="checkmark"></span>
-    </label>   
-    </div>
-        <div>
-    <label class="container">choisir un ellipsoide
-     <input type="checkbox"  class="state" name="multi_note" value="2" onclick="showMe('div2', this)">
-     <span class="checkmark"></span>
-    </label>
-        </div>
-        </div>
+    choix 1 <input type="checkbox" name="multi_note" value="1" onclick="showMe('div1', this)" checked>
+    choix 2 <input type="checkbox"  name="multi_note" value="2" onclick="showMe('div2', this)">
     <div class="box">
         <div id="div1" style="display:none">
     
@@ -54,8 +42,7 @@
         </div>
     </div>
         
-    <div  id="div2" style="display:none">
-    <div class="box">
+    <div class="box" id="div2" style="display:none">
         <div>
         <label>entrer a : </label>
         <input type="number" name="aa" value="0" min="0"  id="fa" ><br> 
@@ -67,31 +54,7 @@
         <div id="cb" class="emsg"></div> <br>
         </div>
     </div>
-    </div>
 
-
-
-
-    <div class="box">
-        <div>
-    <label class="container">coordonnée géodésique
-     <input type="checkbox" class="state" name="multi_note" value="1" onclick="showMe('div3', this)" >
-     <span class="checkmark"></span>
-    </label>    
-    </div>
-        <div>
-    <label class="container">coordonnée géocentrique
-     <input type="checkbox"  class="state" name="multi_note" value="2" onclick="showMe('div4', this)">
-     <span class="checkmark"></span>
-    </label>    
-    </div>
-    </div>
-
-
-
-
-
-    <div id="div3" >
     <div class="box">
         <div>
     <label> La latitude du point de départ </label><br>
@@ -113,7 +76,6 @@
     
     
     
-    
 
 <div>
 
@@ -130,34 +92,6 @@
     <div id="clos" class="emsg"></div> <br>
 </div>
     </div>
-</div>
-
-
-<div id="div4" style="display:none">
-<div>
-    <label>les coordonnée géocentrique </label>
-    <div class="box">
-        
-    
-    <div>
-    <label>X</label>
-    <input type="number" name="cx" placeholder="la valeur de x" value="1" >
-    </div>
-    <div>
-    <label>Y</label>
-    <input type="number" name="cy" placeholder="la valeur de y" value="1" >
-    </div>
-    <div>
-    <label>Z</label>
-    <input type="number" name="cz" placeholder="la valeur de z" value="1" >
-    </div>
-
-    </div>
-
-
-</div>
-</div>
-
     <div class="box">
         <div>
 
