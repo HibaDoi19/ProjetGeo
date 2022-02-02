@@ -31,4 +31,4 @@ def geocentrique2geodesique(x,y,z,a,b):
         long=np.arctan(y/x)*180/pi-180
         
         
-    return long,phi1*180/pi,h
+    return phi1*180/pi,long,h
