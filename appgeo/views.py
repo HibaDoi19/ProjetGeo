@@ -283,24 +283,24 @@ def inverse(request):
 
         systeme=request.GET["multi_note"]
         if systeme =="1":
-                latitude1=lam1
-                longitude1=phi1
-                latitude2=lam2
-                longitude2=phi2
+                latitude1=phi1
+                longitude1=lam1
+                latitude2=phi2
+                longitude2=lam2
 
                                 
         elif systeme =="2":
-                latitude1=lat1
-                longitude1=long1
-                latitude2=lat2
-                longitude2=long2
+                latitude1=lat1*pi/180
+                longitude1=long1*pi/180
+                latitude2=lat2*pi/180
+                longitude2=long2*pi/180
 
         xx,yy,zz=innverse.inversee(latitude1,latitude2,longitude1,longitude2,x,y)
         xx=float(xx)
         yy=float(yy)
         zz=float(zz)
 
-        #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
-        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(lam1,phi1, xx*pi/180, zz, x, y)})
+        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
+        #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(lam1,phi1, xx*pi/180, zz, x, y)})
 
         
