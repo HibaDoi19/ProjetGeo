@@ -44,24 +44,7 @@ def visualisation(longitude1 , latitude1,alpha1,s,a,b):
 
 def directe(latitude1, longitude1, alpha1, s, a, b):
     #VERIFICATION DES PARAMèTRE DE L'ELLIPSOIDE
-        if a<0 or b<0 or b>a:
-                texte="a et b doivent être positifs et b doit être inférieur à a"
-                return texte
-        #vérification de s
-        elif s<0 :
-                texte="erreur, distance doit être positive"
-                return texte
-        #vérification de l'azimut
-        elif alpha1<0 or alpha1>360 :
-                texte="Erreur : azimut doit être entre 0° et 360°"
-                return texte
-        elif abs(latitude1)>pi/2 :
-                texte="Erreur: valeur de la latitude hors rang"
-                return texte
-        elif abs(longitude1)>pi :
-                texte= "erreur : longitude hors rang ! "
-                return texte
-        else:
+
                 f = (a-b)/a
                 ep = sqrt((a**2-b**2)/b**2)
                 #Calcul de la latitude réduite beta1
@@ -119,6 +102,10 @@ def directe(latitude1, longitude1, alpha1, s, a, b):
                                 alpha21 = alpha2 + pi
                         if ( alpha2 > pi ) :
                                 alpha21 = alpha2 - pi
+                        if alpha1<pi and longitude2<(longitude1*180/pi) and longitude1<0:
+                                longitude2 = longitude2+180
+                        if alpha1<pi and longitude1>0 and longitude2<(longitude1*180/pi) : 
+                                longitude2=longitude2-180                        
 
                 return longitude2,latitude2,alpha2
 
@@ -143,10 +130,6 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):
                 x,y,z=visualisation(longitude1,latitude1,alpha1,s,a,b)
 
                 fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'red'})
-#######################################################################################
-                
-#######################################################################################
-                
 
                 plot_div = fig.to_html(full_html=False)
 
