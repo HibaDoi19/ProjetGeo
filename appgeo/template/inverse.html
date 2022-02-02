@@ -1,15 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<script type="text/javascript">
+    function showMe (it, box) {
+    var vis = (box.checked) ? "block" : "none";
+    document.getElementById(it).style.display = vis;
+    }
+</script>
 
 <center>
 <div>
 
 <h1>Probléme Inverse</h1>
 <form action ="http://127.0.0.1:8000/appgeo/resul"  onsubmit="return checck()" novalidate>
-    
     <div class="box">
         <div>
+    <label class="container">personnaliser un ellipsoide
+     <input type="checkbox" class="state" name="multi_note" value="1" onclick="showMe('div1', this)" >
+     <span class="checkmark"></span>
+    </label>   
+    </div>
+        <div>
+    <label class="container">choisir un ellipsoide
+     <input type="checkbox"  class="state" name="multi_note" value="2" onclick="showMe('div2', this)">
+     <span class="checkmark"></span>
+    </label>
+        </div>
+        </div>   
+    <div class="box" >
+        <div id="div1" style="display:none">
 
         <label>choisir un ellipsoide</label>
         <select name="sys" size="1">
@@ -35,21 +54,37 @@
         </div>
     </div>
 
+    <div  id="div2" style="display:none">
     <div class="box">
         <div>
-        <label> la valeur de a</label>
+        <label> entrer a :</label>
         <input type="number" name="aa" value="0" min="0" id="finv_a" ><br>
         <div id="cinv_a" class="emsg"></div> <br>
         </div>
 
         <div>
-        <label> la valeur de b</label>
+        <label> entrer b :</label>
         <input type="number" name="bb"value="0"  min="0" id="finv_b"><br> 
         <div id="cinv_b" class="emsg"></div> <br>
         </div>
     </div>
+    </div>
    
-    
+    <div class="box">
+        <div>
+    <label class="container">coordonnée géodésique
+     <input type="checkbox" class="state" name="multi_note" value="1" onclick="showMe('div3', this)" >
+     <span class="checkmark"></span>
+    </label>    
+    </div>
+        <div>
+    <label class="container">coordonnée géocentrique
+     <input type="checkbox"  class="state" name="multi_note" value="2" onclick="showMe('div4', this)">
+     <span class="checkmark"></span>
+    </label>    
+    </div>
+    </div>   
+    <div id="div3" style="display:none" >
     <div class="box">
         <div>
         <label> La latitude du premier point</label><br>
@@ -116,7 +151,53 @@
         
         </div>
     </div>
+    </div>
 
+    <div id="div4" style="display:none">
+        <div>
+            <label>les coordonnée géocentrique </label>
+            <label>le premier point </label>
+            <div class="box">
+            
+                
+            
+            <div>
+            <label>X</label>
+            <input type="number" name="cx1" placeholder="la valeur de x" value="1" min="1">
+            </div>
+            <div>
+            <label>Y</label>
+            <input type="number" name="cy1" placeholder="la valeur de y" value="1" min="1">
+            </div>
+            <div>
+            <label>Z</label>
+            <input type="number" name="cz1" placeholder="la valeur de z" value="1" min="1">
+            </div>
+        
+            </div>
+            <label>le deusième  point </label>
+            <div class="box">
+                
+                    
+                
+                <div>
+                <label>X</label>
+                <input type="number" name="cx2" placeholder="la valeur de x" value="1" min="1">
+                </div>
+                <div>
+                <label>Y</label>
+                <input type="number" name="cy2" placeholder="la valeur de y" value="1" min="1">
+                </div>
+                <div>
+                <label>Z</label>
+                <input type="number" name="cz2" placeholder="la valeur de z" value="1" min="1">
+                </div>
+            
+                </div>
+        
+        
+        </div>
+        </div>
 
    
     <div class="box">

@@ -202,6 +202,14 @@ def inverse(request):
         drc_lat_2=int(request.GET["drc_lat_2"])
         drc_long_2=int(request.GET["drc_long_2"])
 
+        X1= request.GET["cx1"]
+        Y1= request.GET["cy1"]
+        Z1= request.GET["cz1"]
+
+        X2= request.GET["cx2"]
+        Y2= request.GET["cy2"]
+        Z2= request.GET["cz2"]
+
         systeme=request.GET['sys']
         if systeme =="1":
                 a=6378137
@@ -269,11 +277,29 @@ def inverse(request):
         phi2=phi2*drc_lat_2
         lam1=lam1*drc_long_1
         lam2=lam2*drc_long_2
-        
-        xx,yy,zz=innverse.inversee(phi1,phi2,lam1,lam2,x,y)
+
+        lat1,long1,h1=geocentrique2geodesique.geocentrique2geodesique(X1,Y1,Z1,x,y)
+        lat2,long2,h2=geocentrique2geodesique.geocentrique2geodesique(X2,Y2,Z2,x,y)
+
+        systeme=request.GET["multi_note"]
+        if systeme =="1":
+                latitude1=lam1
+                longitude1=phi1
+                latitude2=lam2
+                longitude2=phi2
+
+                                
+        elif systeme =="2":
+                latitude1=lat1
+                longitude1=long1
+                latitude2=lat2
+                longitude2=long2
+
+        xx,yy,zz=innverse.inversee(latitude1,latitude2,longitude1,longitude2,x,y)
         xx=float(xx)
         yy=float(yy)
         zz=float(zz)
+
         #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
         return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(lam1,phi1, xx*pi/180, zz, x, y)})
 
