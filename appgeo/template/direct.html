@@ -15,13 +15,13 @@
 <form action ="http://127.0.0.1:8000/appgeo/resultd/"   onsubmit="return check()" novalidate>
     <div class="box">
         <div>
-    <label class="container">personnaliser un ellipsoide
+    <label class="container">choisir un ellipsoide
      <input type="checkbox" class="state" name="multi_note" value="1" onclick="showMe('div1', this)" >
      <span class="checkmark"></span>
     </label>   
     </div>
         <div>
-    <label class="container">choisir un ellipsoide
+    <label class="container">personnaliser un ellipsoide
      <input type="checkbox"  class="state" name="multi_note" value="2" onclick="showMe('div2', this)">
      <span class="checkmark"></span>
     </label>
@@ -97,9 +97,9 @@
     <label> La latitude du point de départ </label><br>
     
     
-    <input type="number" name="d" placeholder="degree" min="0" max="89" id="flatd"   required>
-    <input type="number" name="min" placeholder="minute"min="0" max="59"  id ="flatm" required> 
-    <input type="number" name="ss" placeholder="seconde"min="0" max="60"  id="flats" required>
+    <input type="number" name="d" placeholder="degree" min="0" max="89" id="flatd"  value="0"  required>
+    <input type="number" name="min" placeholder="minute"min="0" max="59"  id ="flatm" value="0"required> 
+    <input type="number" name="ss" placeholder="seconde"min="0" max="60"  id="flats" value="0" required>
     
     
     <select name="drc_lat" size="1">
@@ -118,9 +118,9 @@
 <div>
 
     <label> La longitude du point de départ </label><br>
-    <input type="number" name="dlo" placeholder="degree" min="0" max="179"  id="flod" required>
-    <input type="number" name="minlo" placeholder="minute" min="0" max="59"  id="flom" required>
-    <input type="number" name="sslo" placeholder="second"min="0" max="60" id="flos" required>
+    <input type="number" name="dlo" placeholder="degree" min="0" max="179" value="0" id="flod" required>
+    <input type="number" name="minlo" placeholder="minute" min="0" max="59"  value="0" id="flom" required>
+    <input type="number" name="sslo" placeholder="second"min="0" max="60" value="0" id="flos" required>
     <select name="drc_long" size="1">
         <option value="1"> E </option>
         <option value="-1"> W </option>
