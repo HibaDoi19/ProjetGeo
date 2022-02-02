@@ -144,14 +144,7 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):
 
                 fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'red'})
 #######################################################################################
-                phi = np.linspace(0, 2*pi)
-                theta = [0 for i in range(0,50)]
-                phi, theta=np.meshgrid(phi, theta)
-
-                X = cos(theta) * sin(phi) * a
-                Y = cos(theta) * cos(phi) * a
-                Z = sin(theta)*b
-                fig.add_scatter3d(x=X,y=Y,z=Z,mode='lines',marker ={'color':'black'})
+                
 #######################################################################################
                 
 
