@@ -7,14 +7,16 @@ def inversee(phi1,phi2,lam1,lam2,a,b):
                         f = (a-b)/a
                 #condition sur phi1
                 if phi1 >(pi/2) or phi1<-(pi/2) :
-                        print('la valeur de la latitude doit être inférieur ou égal à 90°')
+                        #print('la valeur de la latitude doit être inférieur ou égal à 90°')
+                        beta1=0
                 elif phi1==(pi/2) or phi1==-(pi/2):
                         beta1=phi1
                 else:
                         beta1=atan((1-f)*tan(phi1))
                 #condition sur phi2
                 if phi2 > (pi/2) or phi2 < -(pi/2):
-                        print('la valeur de la latitude doit être inférieur ou égal à 90°')
+                        #print('la valeur de la latitude doit être inférieur ou égal à 90°')
+                        beta2=0
                 elif phi2 == (pi/2) or phi2 == -(pi/2):
                         beta2=phi2
                 else:

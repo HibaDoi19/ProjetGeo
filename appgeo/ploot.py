@@ -129,7 +129,7 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):
 
                 x,y,z=visualisation(longitude1,latitude1,alpha1,s,a,b)
 
-                fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'red'})
+                fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'black'})
                 ############################################
                 for i in np.linspace(-80,80,17):
                         phi = np.linspace(0, 360,100)
@@ -138,22 +138,22 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):
                         phi = phi*pi/180
                         theta = theta*pi/180
                         #phi, theta=np.meshgrid(phi, theta)
-                        x = cos(theta) * sin(phi) * 5
-                        y = cos(theta) * cos(phi) * 5
-                        z = sin(theta)*4
+                        x = cos(theta) * sin(phi) * a
+                        y = cos(theta) * cos(phi) * a
+                        z = sin(theta)*b
                         t="latitude"+str(i)
                         fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
     
                         for i in np.linspace(-170,170,35):
-                                phi = np.linspace(i, i,80)
-                                theta = np.linspace(-180, 180,80)
+                                phi = np.linspace(i, i,100)
+                                theta = np.linspace(-180, 180,100)
                                 
                                 phi = phi*pi/180
                                 theta = theta*pi/180
                                 #phi, theta=np.meshgrid(phi, theta)
-                                x = cos(theta) * sin(phi) * 5
-                                y = cos(theta) * cos(phi) * 5
-                                z = sin(theta)*4
+                                x = cos(theta) * sin(phi) * a
+                                y = cos(theta) * cos(phi) * a
+                                z = sin(theta)*b
                                 t="longitude"+str(i)
                                 fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
                 ###########################################

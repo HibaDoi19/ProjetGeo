@@ -283,10 +283,10 @@ def inverse(request):
 
         systeme=request.GET["multi_note"]
         if systeme =="1":
-                latitude1=lam1
-                longitude1=phi1
-                latitude2=lam2
-                longitude2=phi2
+                latitude1=phi1
+                longitude1=lam1
+                latitude2=phi2
+                longitude2=lam2
 
                                 
         elif systeme =="2":
