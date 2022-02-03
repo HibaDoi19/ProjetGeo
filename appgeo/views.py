@@ -130,8 +130,8 @@ def add(request):
 
                                 
                 elif systeme =="2":
-                        latitude1=lat_des
-                        longitude1=long_des
+                        latitude1=long_des
+                        longitude1=lat_des
 
                                 
 
@@ -174,8 +174,8 @@ def add(request):
 
 
 
-                return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 ,'plot':ploot.ellipsoide(longitude1,latitude1, alpha1, s, x, y)} )
-                #return render( request   ,'result.html', {'longitude': res1 ,'latitude': res2 ,'angle azhimutale': res3 ,'plot':ploot.ellipsoide(longitude1,latitude1, alpha1, s, x, y)} )
+                #return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 ,'plot':ploot.ellipsoide(longitude1,latitude1, alpha1, s, x, y)} )
+                return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 } )
         
 def inverse(request):         
         aa=float(request.GET['aa'])
@@ -186,6 +186,7 @@ def inverse(request):
         phi2d=float(request.GET['d2'])
         phi2mm=float(request.GET['min2'])
         phi2ss=float(request.GET['ss2'])
+
         lam1d=float(request.GET['dlo'])
         lam1mm=float(request.GET['minlo'])
         lam1ss=float(request.GET['sslo'])
