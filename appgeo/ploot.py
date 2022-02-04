@@ -36,10 +36,10 @@ def visualisation(longitude1 , latitude1,alpha1,s,a,b):
         x=[]
         y=[]
         z=[]
-        for i in range(0,n): 
-                x.append((a*cos(long[i])*cos(lat[i]))/sqrt(1-(a**2-b**2)/(b**2)*(sin(lat[i]))**2))
-                y.append((a*sin(long[i])*cos(lat[i]))/sqrt(1-(a**2-b**2)/(b**2)*(sin(lat[i]))**2))
-                z.append((a*(1-(a**2-b**2)/(b**2))*sin(lat[i]))/sqrt(1-(a**2-b**2)/(b**2)*(sin(lat[i]))**2))
+        for i in range(2,n): 
+                x.append((a*cos(long[i])*cos(lat[i]))/sqrt(1-(a**2-b**2)/(a**2)*(sin(lat[i]))**2))
+                y.append((a*sin(long[i])*cos(lat[i]))/sqrt(1-(a**2-b**2)/(a**2)*(sin(lat[i]))**2))
+                z.append((a*(1-(a**2-b**2)/(a**2))*sin(lat[i]))/sqrt(1-(a**2-b**2)/(a**2)*(sin(lat[i]))**2))
         return x,y,z 
 
 def directe(latitude1, longitude1, alpha1, s, a, b):
@@ -130,6 +130,9 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):
                 x,y,z=visualisation(longitude1,latitude1,alpha1,s,a,b)
 
                 fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'black'})
+
+                fig.add_scatter3d(x=[x[0]],y=[y[0]],z=[z[0]],mode='markers',marker ={'color':'yellow'})
+                fig.add_scatter3d(x=[x[-1]],y=[y[-1]],z=[z[-1]],mode='markers',marker ={'color':'green'})
                 ############################################
                 for i in np.linspace(-80,80,17):
                         phi = np.linspace(0, 360,100)
@@ -143,6 +146,8 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):
                         z = sin(theta)*b
                         t="latitude"+str(i)
                         fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
+                        
+                        
     
                         for i in np.linspace(-170,170,35):
                                 phi = np.linspace(i, i,100)

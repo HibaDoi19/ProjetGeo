@@ -174,8 +174,8 @@ def add(request):
 
 
 
-                #return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 ,'plot':ploot.ellipsoide(longitude1,latitude1, alpha1, s, x, y)} )
-                return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 } )
+                return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 ,'plot':ploot.ellipsoide(longitude1,latitude1, alpha1, s, x, y)} )
+                #return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 } )
         
 def inverse(request):         
         aa=float(request.GET['aa'])
@@ -301,7 +301,7 @@ def inverse(request):
         yy=float(yy)
         zz=float(zz)
 
-        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
-        #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(lam1,phi1, xx*pi/180, zz, x, y)})
+        #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
+        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(lam1,phi1, xx*pi/180, zz, x, y)})
 
         
