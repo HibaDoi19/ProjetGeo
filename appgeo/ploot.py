@@ -15,8 +15,10 @@ import logging
 import os
 
 
-def visualisation(longitude1 , latitude1,alpha1,s,a,b):
+def visualisation(longitude1 , latitude1,alpha1,s,a,b,h):
+
         #visualisation de l'ellipsoide
+        h=int(h)
         n=500
         t=s/(n-1)
         az_dir=[]
@@ -36,10 +38,12 @@ def visualisation(longitude1 , latitude1,alpha1,s,a,b):
         x=[]
         y=[]
         z=[]
-        for i in range(0,n): 
-                x.append((a*cos(long[i])*cos(lat[i]))/sqrt(1-(a**2-b**2)/(b**2)*(sin(lat[i]))**2))
-                y.append((a*sin(long[i])*cos(lat[i]))/sqrt(1-(a**2-b**2)/(b**2)*(sin(lat[i]))**2))
-                z.append((a*(1-(a**2-b**2)/(b**2))*sin(lat[i]))/sqrt(1-(a**2-b**2)/(b**2)*(sin(lat[i]))**2))
+        for i in range(2,n): 
+                e=sqrt((a**2-b**2)/(a**2))
+                N=a/sqrt(1-e**2*sin(lat[i])**2)
+                x.append((N+h)*cos(long[i])*cos(lat[i]))
+                y.append((N+h)*sin(long[i])*cos(lat[i]))
+                z.append((N*(1-e**2)+h)*sin(lat[i]))
         return x,y,z 
 
 def directe(latitude1, longitude1, alpha1, s, a, b):
@@ -105,14 +109,12 @@ def directe(latitude1, longitude1, alpha1, s, a, b):
                         if alpha1<pi and longitude2<(longitude1*180/pi) and longitude1<0:
                                 longitude2 = longitude2+180
                         if alpha1<pi and longitude1>0 and longitude2<(longitude1*180/pi) : 
-                                longitude2=longitude2-180                        
+                                longitude2=longitude2-180  
+                                                
 
                 return longitude2,latitude2,alpha2
 
-
-
-def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):              
-                        
+def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):                      
                 phi = np.linspace(0, 2*pi)
                 theta = np.linspace(-pi/2, pi/2)
                 phi, theta=np.meshgrid(phi, theta)
@@ -121,30 +123,32 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b):
                 Y = cos(theta) * cos(phi) * a
                 Z = sin(theta)*b
                 
-                layout = go.Layout(width = 700, height =700,title_text='Géodesique')
+                layout = go.Layout(width = 800, height =800,title_text='Géodesique')
 
                 fig = go.Figure(data=[go.Surface(x = X, y = Y, z=Z, colorscale = 'Blues')], layout=layout)
 
                 fig.update_traces(contours_z=dict(show=True, usecolormap=True,highlightcolor="limegreen", project_z=True))
 
-                x,y,z=visualisation(longitude1,latitude1,alpha1,s,a,b)
+                x,y,z=visualisation(longitude1,latitude1,alpha1,s,a,b,h)
 
                 fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'black'})
+                fig.add_scatter3d(x=[x[1]],y=[y[1]],z=[z[1]],mode='markers',marker ={'color':'yellow'})
+                fig.add_scatter3d(x=[x[-1]],y=[y[-1]],z=[z[-1]],mode='markers',marker ={'color':'green'})
                 ############################################
                 for i in np.linspace(-80,80,17):
-                        phi = np.linspace(0, 360,100)
-                        theta = np.linspace(i, i,100)
-    
-                        phi = phi*pi/180
-                        theta = theta*pi/180
-                        #phi, theta=np.meshgrid(phi, theta)
-                        x = cos(theta) * sin(phi) * a
-                        y = cos(theta) * cos(phi) * a
-                        z = sin(theta)*b
-                        t="latitude"+str(i)
-                        fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
-    
-                        for i in np.linspace(-170,170,35):
+                                phi = np.linspace(0, 360,100)
+                                theta = np.linspace(i, i,100)
+        
+                                phi = phi*pi/180
+                                theta = theta*pi/180
+                                #phi, theta=np.meshgrid(phi, theta)
+                                x = cos(theta) * sin(phi) * a
+                                y = cos(theta) * cos(phi) * a
+                                z = sin(theta)*b
+                                t="latitude"+str(i)
+                                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
+        
+                for i in np.linspace(-170,170,35):
                                 phi = np.linspace(i, i,100)
                                 theta = np.linspace(-180, 180,100)
                                 
