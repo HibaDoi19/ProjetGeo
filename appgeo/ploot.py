@@ -132,23 +132,26 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 x,y,z=visualisation(longitude1,latitude1,alpha1,s,a,b,h)
 
                 fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'black'})
-                fig.add_scatter3d(x=[x[1]],y=[y[1]],z=[z[1]],mode='markers',marker ={'color':'yellow'})
+
+                fig.add_scatter3d(x=[x[0]],y=[y[0]],z=[z[0]],mode='markers',marker ={'color':'yellow'})
                 fig.add_scatter3d(x=[x[-1]],y=[y[-1]],z=[z[-1]],mode='markers',marker ={'color':'green'})
                 ############################################
                 for i in np.linspace(-80,80,17):
-                                phi = np.linspace(0, 360,100)
-                                theta = np.linspace(i, i,100)
-        
-                                phi = phi*pi/180
-                                theta = theta*pi/180
-                                #phi, theta=np.meshgrid(phi, theta)
-                                x = cos(theta) * sin(phi) * a
-                                y = cos(theta) * cos(phi) * a
-                                z = sin(theta)*b
-                                t="latitude"+str(i)
-                                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
-        
-                for i in np.linspace(-170,170,35):
+                        phi = np.linspace(0, 360,100)
+                        theta = np.linspace(i, i,100)
+    
+                        phi = phi*pi/180
+                        theta = theta*pi/180
+                        #phi, theta=np.meshgrid(phi, theta)
+                        x = cos(theta) * sin(phi) * a
+                        y = cos(theta) * cos(phi) * a
+                        z = sin(theta)*b
+                        t="latitude"+str(i)
+                        fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
+                        
+                        
+    
+                        for i in np.linspace(-170,170,35):
                                 phi = np.linspace(i, i,100)
                                 theta = np.linspace(-180, 180,100)
                                 
