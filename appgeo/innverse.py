@@ -1,5 +1,7 @@
 from math import *       
 def inversee(phi1,phi2,lam1,lam2,a,b):
+                if phi1==phi2 and lam1==lam2 :
+                        return 0, 0, 0
                 if a<0 or b<0:
                         texte="a et b doivent être positifs"
                         return texte
