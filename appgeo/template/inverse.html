@@ -7,30 +7,58 @@
     document.getElementById(it).style.display = vis;
     }
 </script>
+<script> function hideA(x) {
+    if (x.checked) {
+      document.getElementById("div1").style.display = "none";
+      document.getElementById("div2").style.display = "block";
+    }
+  }
+ 
+  function hideB(x) {
+    if (x.checked) {
+      document.getElementById("div2").style.display = "none";
+      document.getElementById("div1").style.display = "block";
+    }
+  }
+</script>
+<script> function hideeA(x) {
+    if (x.checked) {
+      document.getElementById("div3").style.display = "none";
+      document.getElementById("div4").style.display = "block";
+    }
+  }
+ 
+  function hideeB(x) {
+    if (x.checked) {
+      document.getElementById("div4").style.display = "none";
+      document.getElementById("div3").style.display = "block";
+    }
+  }
+</script>
 
 <center>
 <div>
 
 <h1>Probléme Inverse</h1>
 <form action ="http://127.0.0.1:8000/appgeo/resul"  onsubmit="return checck()" novalidate>
-    <div class="box">
+    <div class="box1">
         <div>
-    <label class="container">personnaliser un ellipsoide
-     <input type="checkbox" class="state" name="multinote" value="1" onclick="showMe('div1', this)" >
+    <label class="container">Choisir un ellipsoide
+     <input type="radio" class="state" name="multinote" value="1" onclick="hideB(this)" checked>
      <span class="checkmark"></span>
     </label>   
     </div>
         <div>
-    <label class="container">choisir un ellipsoide
-     <input type="checkbox"  class="state" name="multinote" value="2" onclick="showMe('div2', this)">
+    <label class="container">Personnaliser un ellipsoide
+     <input type="radio"  class="state" name="multinote" value="2" onclick="hideA(this)">
      <span class="checkmark"></span>
     </label>
         </div>
         </div>   
     <div class="box" >
-        <div id="div1" style="display:none">
+        <div id="div1" >
 
-        <label>choisir un ellipsoide</label>
+        <label class="mm">Choisir un ellipsoide</label>
         <select name="sys" size="1">
         <option  value="1"> WGS 84</option>
         <option  value="2"> WGS 72</option>
@@ -57,37 +85,37 @@
     <div  id="div2" style="display:none">
     <div class="box">
         <div>
-        <label> entrer a :</label>
+        <label class="mm"> Entrer a :</label>
         <input type="number" name="aa" value="0" min="0" id="finv_a" ><br>
         <div id="cinv_a" class="emsg"></div> <br>
         </div>
 
         <div>
-        <label> entrer b :</label>
+        <label class="mm"> Entrer b :</label>
         <input type="number" name="bb"value="0"  min="0" id="finv_b"><br> 
         <div id="cinv_b" class="emsg"></div> <br>
         </div>
     </div>
     </div>
    
-    <div class="box">
+    <div class="box1">
         <div>
-    <label class="container">coordonnée géodésique
-     <input type="checkbox" class="state" name="multi_note" value="1" onclick="showMe('div3', this)" >
+    <label class="container" class="ff">Coordonnées géodésiques
+     <input type="radio" class="state" name="multi_note" value="1" onclick="hideeB(this)" checked>
      <span class="checkmark"></span>
     </label>    
     </div>
         <div>
-    <label class="container">coordonnée géocentrique
-     <input type="checkbox"  class="state" name="multi_note" value="2" onclick="showMe('div4', this)">
+    <label class="container" class="ff">Coordonnées géocentriques
+     <input type="radio"  class="state" name="multi_note" value="2" onclick="hideeA(this)">
      <span class="checkmark"></span>
     </label>    
     </div>
     </div>   
-    <div id="div3" style="display:none" >
+    <div id="div3"  >
     <div class="box">
         <div>
-        <label> La latitude du premier point</label><br>
+        <label class="mm"> La latitude du premier point</label><br>
 
 
         <input type="number" name="d" placeholder="degree" value="0" min="0" max="89" id="flatd1i" required>
@@ -105,7 +133,7 @@
         </div>
 
         <div>
-        <label> La longitude du premier point</label><br>
+        <label class="mm"> La longitude du premier point</label><br>
         <input type="number" name="dlo" placeholder="degree"  value="0" min="0" max="179" id="flongd1i" required>
         <input type="number" name="minlo" placeholder="minute" value="0" min="0" max="59" id= "flongm1i" required> 
         <input type="number" name="sslo" placeholder="seconde" value="0"  min="0" max="60" id="flongs1i" required>
@@ -121,7 +149,7 @@
 
     <div class="box">
         <div>
-        <label> La latitude du deuxième point</label><br>
+        <label  class="mm"> La latitude du deuxième point</label><br>
         <input type="number" name="d2" placeholder="degree" value="0" min="0" max="89" id="flatd2i"required>
         <input type="number" name="min2"  placeholder="minute" value="0" min="0" max="89" id="flatm2i" required> 
         <input type="number"name="ss2" placeholder="seconde" value="0"  min="0" max="89" id="flats2i" required>
@@ -137,7 +165,7 @@
         
         <div>
 
-        <label> La longitude du deuxième point</label><br>
+        <label  class="mm" > La longitude du deuxième point</label><br>
         <input type="number" name="dlo2"  placeholder="degree"  value="0" min="0" max="179" id="flongd2i" required>
         <input type="number" name="minlo2" placeholder="minute"  value="0" min="0" max="59" id="flongm2i"required> 
         <input type="number" name="sslo2"placeholder="seconde"  value="0" min="0" max="60" id="flongs2i"required>
@@ -155,41 +183,41 @@
 
     <div id="div4" style="display:none">
         <div>
-            <label>les coordonnée géocentrique </label>
-            <label>le premier point </label>
+            
+            <label>Le premier point </label>
             <div class="box">
             
                 
             
             <div>
-            <label>X</label>
+            <label class="mm">X</label>
             <input type="number" name="cx1" placeholder="la valeur de x" value="1" min="1">
             </div>
             <div>
-            <label>Y</label>
+            <label class="mm">Y</label>
             <input type="number" name="cy1" placeholder="la valeur de y" value="1" min="1">
             </div>
             <div>
-            <label>Z</label>
+            <label class="mm">Z</label>
             <input type="number" name="cz1" placeholder="la valeur de z" value="1" min="1">
             </div>
         
             </div>
-            <label>le deusième  point </label>
+            <label>Le deusième  point </label>
             <div class="box">
                 
                     
                 
                 <div>
-                <label>X</label>
+                <label class="mm">X</label>
                 <input type="number" name="cx2" placeholder="la valeur de x" value="1" min="1">
                 </div>
                 <div>
-                <label>Y</label>
+                <label class="mm">Y</label>
                 <input type="number" name="cy2" placeholder="la valeur de y" value="1" min="1">
                 </div>
                 <div>
-                <label>Z</label>
+                <label class="mm">Z</label>
                 <input type="number" name="cz2" placeholder="la valeur de z" value="1" min="1">
                 </div>
             

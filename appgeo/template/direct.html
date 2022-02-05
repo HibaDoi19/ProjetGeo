@@ -7,30 +7,59 @@
     document.getElementById(it).style.display = vis;
     }
 </script>
+<script> function hideA(x) {
+    if (x.checked) {
+      document.getElementById("div1").style.display = "none";
+      document.getElementById("div2").style.display = "block";
+    }
+  }
+ 
+  function hideB(x) {
+    if (x.checked) {
+      document.getElementById("div2").style.display = "none";
+      document.getElementById("div1").style.display = "block";
+    }
+  }
+</script>
+<script> function hideeA(x) {
+    if (x.checked) {
+      document.getElementById("div3").style.display = "none";
+      document.getElementById("div4").style.display = "block";
+    }
+  }
+ 
+  function hideeB(x) {
+    if (x.checked) {
+      document.getElementById("div4").style.display = "none";
+      document.getElementById("div3").style.display = "block";
+    }
+  }
+</script>
+    
 
 <center> 
 <div>
     
 <h1>Probléme Direct</h1>
 <form action ="http://127.0.0.1:8000/appgeo/resultd/"   onsubmit="return check()" novalidate>
-    <div class="box">
+    <div class="box1">
         <div>
-    <label class="container">choisir un ellipsoide
-     <input type="checkbox" class="state" name="multi_note" value="1" onclick="showMe('div1', this)" >
+    <label class="container"class="ff">Choisir un ellipsoide
+     <input type="radio" class="state" name="multinote" value="1" onchange="hideB(this)" checked>
      <span class="checkmark"></span>
     </label>   
     </div>
         <div>
-    <label class="container">personnaliser un ellipsoide
-     <input type="checkbox"  class="state" name="multi_note" value="2" onclick="showMe('div2', this)">
+    <label class="container"class="ff">Personnaliser un ellipsoide
+     <input type="radio"  class="state" name="multinote" value="2" onclick="hideA(this)">
      <span class="checkmark"></span>
     </label>
         </div>
         </div>
     <div class="box">
-        <div id="div1" style="display:none">
+        <div id="div1" >
     
-        <label>choisir un ellipsoide</label>
+        <label class="mm">choisir un ellipsoide</label>
         <select name="sys" size="1">
         <option  value="1"> WGS 84
         <option  value="2"> WGS 72
@@ -54,15 +83,15 @@
         </div>
     </div>
         
-    <div  id="div2" style="display:none">
+    <div   id="div2" style="display:none" >
     <div class="box">
         <div>
-        <label>entrer a : </label>
+        <label class="mm">entrer a : </label>
         <input type="number" name="aa" value="0" min="0"  id="fa" ><br> 
         <div id="ca" class="emsg"></div> <br>
         </div>
         <div>
-        <label>entrer b : </label>
+        <label class="mm">entrer b : </label>
         <input type="number" name="bb" value="0" min="0" id="fb" ><br> 
         <div id="cb" class="emsg"></div> <br>
         </div>
@@ -72,16 +101,16 @@
 
 
 
-    <div class="box">
+    <div class="box1">
         <div>
-    <label class="container">coordonnée géodésique
-     <input type="checkbox" class="state" name="multi_note" value="1" onclick="showMe('div3', this)" >
+    <label class="container" class="ff">coordonnées géodésiques
+     <input type="radio" class="state" name="multi_note" value="1" onchange="hideeB(this)" checked>
      <span class="checkmark"></span>
     </label>    
     </div>
         <div>
-    <label class="container">coordonnée géocentrique
-     <input type="checkbox"  class="state" name="multi_note" value="2" onclick="showMe('div4', this)">
+    <label class="container"class="ff">coordonnées géocentriques
+     <input type="radio"  class="state" name="multi_note" value="2" onchange="hideeA(this)">
      <span class="checkmark"></span>
     </label>    
     </div>
@@ -91,10 +120,10 @@
 
 
 
-    <div id="div3" style="display:none" >
+    <div id="div3"  >
     <div class="box">
         <div>
-    <label> La latitude du point de départ </label><br>
+    <label class="mm"> La latitude du point de départ </label><br>
     
     
     <input type="number" name="d" placeholder="degree" min="0" max="89" id="flatd"  value="0"  required>
@@ -117,7 +146,7 @@
 
 <div>
 
-    <label> La longitude du point de départ </label><br>
+    <label class="mm"> La longitude du point de départ </label><br>
     <input type="number" name="dlo" placeholder="degree" min="0" max="179" value="0" id="flod" required>
     <input type="number" name="minlo" placeholder="minute" min="0" max="59"  value="0" id="flom" required>
     <input type="number" name="sslo" placeholder="second"min="0" max="60" value="0" id="flos" required>
@@ -133,22 +162,22 @@
 </div>
 
 
-<div id="div4" style="display:none">
+<div id="div4" style="display:none" >
 <div>
-    <label>les coordonnée géocentrique </label>
+    
     <div class="box">
         
     
     <div>
-    <label>X</label>
+    <label class="mm">X</label>
     <input type="number" name="cx" placeholder="la valeur de x" value="1" >
     </div>
     <div>
-    <label>Y</label>
+    <label class="mm">Y</label>
     <input type="number" name="cy" placeholder="la valeur de y" value="1" >
     </div>
     <div>
-    <label>Z</label>
+    <label class="mm">Z</label>
     <input type="number" name="cz" placeholder="la valeur de z" value="1" >
     </div>
 
@@ -157,16 +186,25 @@
 
 </div>
 </div>
-
+<!--
+<div class="box">
+    <div>
+        <label class="mm">la hauteur du premier point </label>
+        <input type="number" name="h1" placeholder="hauteur du premier point"min="0" id="fh1"   value="0" required>
+        <div id="ch1" class="emsg"></div> <br>
+    </div>
+</div>
+-->
     <div class="box">
         <div>
 
-    <label>entrer azimut du point du départ en degres decimal : </label><br>
+    <label  class="mm">entrer azimut du point du départ en degres decimal : </label><br>
     <input type="number" name="az" min="0" max="360" id="faz" required><br> 
     <div id="caz" class="emsg"></div> <br>
         </div>
+    
 <div>
-    <label> la distance géodesique en métre :</label><br>
+    <label class="mm"> la distance géodesique en métre :</label><br>
     <input type="number" name="s"  min="0" id="fs" required><br>
     <div id="cs" class="emsg"></div> <br>
 </div>

@@ -53,6 +53,7 @@ def add(request):
                 X_centrique= request.GET["cx"]
                 Y_centrique= request.GET["cy"]
                 Z_centrique= request.GET["cz"]
+                #h1=request.GET["h1"]
 
 
                 systeme=request.GET['sys']
@@ -127,11 +128,13 @@ def add(request):
                 if systeme =="1":
                         latitude1=latitude1
                         longitude1=longitude1
+                        h1=0
 
                                 
                 elif systeme =="2":
                         latitude1=long_des
                         longitude1=lat_des
+                        h1=h_des
 
                                 
 
@@ -174,8 +177,8 @@ def add(request):
 
 
 
-                #return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 ,'plot':ploot.ellipsoide(longitude1,latitude1, alpha1, s, x, y)} )
-                return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 } )
+                return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 ,'plot':ploot.ellipsoide(longitude1,latitude1, alpha1, s, x, y,h1)} )
+                #return render( request   ,'result.html', {'longituded': long_d ,'longitudem': long_m ,'longitudes': long_s ,'latituded': lat_d ,'latitudem': lat_m,'latitudes': lat_s,'angle_azhimutale': res3 } )
         
 def inverse(request):         
         aa=float(request.GET['aa'])
@@ -288,6 +291,7 @@ def inverse(request):
                 longitude1=lam1
                 latitude2=phi2
                 longitude2=lam2
+                h1=0
 
                                 
         elif systeme =="2":
@@ -295,13 +299,14 @@ def inverse(request):
                 longitude1=long1*pi/180
                 latitude2=lat2*pi/180
                 longitude2=long2*pi/180
+                h1=h1
 
         xx,yy,zz=innverse.inversee(latitude1,latitude2,longitude1,longitude2,x,y)
         xx=float(xx)
         yy=float(yy)
         zz=float(zz)
 
-        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
-        #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(lam1,phi1, xx*pi/180, zz, x, y)})
+        #return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) })
+        return render( request ,'resultinv.html', {'ALPHA12': round(xx),'ALPHA21': round(yy),'s': round(zz) ,'plot':ploot.ellipsoide(lam1,phi1, xx*pi/180, zz, x, y,h1)})
 
         
