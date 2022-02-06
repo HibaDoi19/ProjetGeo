@@ -73,4 +73,8 @@ var showForm = function(id){
         <input type="text" value="3">
     </div>
 ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
-       
+{% if error_msg %}
+<script>
+    alert("Veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi!!")
+</script>
+{% endif %}
