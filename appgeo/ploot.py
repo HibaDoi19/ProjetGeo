@@ -144,7 +144,7 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 fig.add_scatter3d(x=[x[0]],y=[y[0]],z=[z[0]],mode='markers',marker ={'color':'yellow'})
                 fig.add_scatter3d(x=[x[-1]],y=[y[-1]],z=[z[-1]],mode='markers',marker ={'color':'green'})
                 ############################################
-                for i in np.linspace(-80,80,17):
+                for i in [-80,-70,-60,-50,-40,-30,-20,-10,10,20,30,40,50,60,70,80]:
                         phi = np.linspace(0, 360,100)
                         theta = np.linspace(i, i,100)
     
@@ -157,9 +157,18 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                         t="latitude"+str(i)
                         fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
                         
-                        
+                        phi = np.linspace(0, 360,100)
+                theta = np.linspace(0, 0,100)
+                phi = phi*pi/180
+                theta = theta*pi/180
+                #phi, theta=np.meshgrid(phi, theta)
+                x = cos(theta) * sin(phi) * a
+                y = cos(theta) * cos(phi) * a
+                z = sin(theta)*b
+                t="latitude"+str(i)
+                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'pink'},text=t)
     
-                for i in [-170,-160,-150,-140,-130,-120,-110,-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170]:
+                for i in [-170,-160,-150,-140,-130,-120,-110,-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180]:
                         phi = np.linspace(i, i,100)
                         theta = np.linspace(-90,90,100)
                         
@@ -181,7 +190,7 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 y = cos(theta) * cos(phi) * a
                 z = sin(theta)*b
                 t="longitude"+str(i)
-                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'purple'},text=t)
+                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'#28B463'},text=t)
                         
                 ###########################################
 
