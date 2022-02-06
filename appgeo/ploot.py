@@ -165,8 +165,8 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 x = cos(theta) * sin(phi) * a
                 y = cos(theta) * cos(phi) * a
                 z = sin(theta)*b
-                t="latitude"+str(i)
-                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'pink'},text=t)
+                t="équateur"
+                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'#FF2391'},text=t)
     
                 for i in [-170,-160,-150,-140,-130,-120,-110,-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180]:
                         phi = np.linspace(i, i,100)
@@ -189,7 +189,7 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 x = cos(theta) * sin(phi) * a
                 y = cos(theta) * cos(phi) * a
                 z = sin(theta)*b
-                t="longitude"+str(i)
+                t="Greenwich"
                 fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'#28B463'},text=t)
                         
                 ###########################################
