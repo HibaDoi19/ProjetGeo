@@ -54,6 +54,8 @@ def add(request):
                 Y_centrique= float(request.GET["cy"])
                 Z_centrique= float(request.GET["cz"])
                 #h1=request.GET["h1"]
+                if ( X_centrique ==0 and Y_centrique==0 and Z_centrique==0) :
+                        return render( request   ,'inverse.html', {'error_msg2': "veuillez rentrer des valeurs différent du centre de l'ellipsoide dans le premier point."} )
 
 
                 systeme=request.GET['sys']
@@ -214,6 +216,10 @@ def inverse(request):
         X2= float(request.GET["cx2"])
         Y2= float(request.GET["cy2"])
         Z2= float(request.GET["cz2"])
+        if ( X1 ==0 and Y1==0 and Z1==0) :
+                        return render( request   ,'inverse.html', {'error_msg2': "veuillez rentrer des valeurs différent du centre de l'ellipsoide dans le premier point."} )
+        if ( X2 ==0 and Y2==0 and Z2==0) :
+                        return render( request   ,'inverse.html', {'error_msg3': "veuillez rentrer des valeurs différent du centre de l'ellipsoide dans le deusième point."} )
 
         systeme=request.GET['sys']
         if systeme =="1":

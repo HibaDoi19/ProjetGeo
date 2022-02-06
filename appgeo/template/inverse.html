@@ -241,12 +241,20 @@
     </div>
 
     {% if error_msg %}
-    <script defer>
-        alert("Veuillez rentrer des valeurs valables de X1, Y1, Z1 dnas l'ellipsoide choisi!!")
-    </script>
-    {% elif  error_msg %}
     <script defer >
-        alert("Veuillez rentrer des valeurs valables de X2, Y2, Z2 dnas l'ellipsoide choisi!!")
+        alert("Veuillez rentrer des valeurs valables de X1, Y1, Z1 dans l'ellipsoide choisi!!")
+    </script>
+    {% elif  error_msg1 %}
+    <script defer >
+        alert("Veuillez rentrer des valeurs valables de X2, Y2, Z2 dans l'ellipsoide choisi!!")
+    </script>
+    {% elif  error_msg2 %}
+    <script cefer >
+        alert("veuillez rentrer des valeurs différentes du centre de l'ellipsoide dans le premier point.")
+    </script>
+    {% elif  error_msg3 %}
+    <script  defer>
+        alert("veuillez rentrer des valeurs différentes du centre de l'ellipsoide dans le deusieme point.")
     </script>
     {% endif %}
     
