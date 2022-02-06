@@ -50,9 +50,9 @@ def add(request):
                 drc_lat=int(request.GET["drc_lat"])
                 drc_long=int(request.GET["drc_long"])
 
-                X_centrique= request.GET["cx"]
-                Y_centrique= request.GET["cy"]
-                Z_centrique= request.GET["cz"]
+                X_centrique= float(request.GET["cx"])
+                Y_centrique= float(request.GET["cy"])
+                Z_centrique= float(request.GET["cz"])
                 #h1=request.GET["h1"]
 
 
@@ -138,7 +138,8 @@ def add(request):
 
                                 
 
-
+                if not (X_centrique**2/x**2 + Y_centrique**2/x**2 + Z_centrique**2/y**2 == 1) and systeme == "2":
+                        return render( request   ,'direct.html', {'error_msg': "veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi."} )
                 #if request.methode =="post" and "Calculer" in request.POST :
                 res1,res2,res3=direct.direct(latitude1, longitude1, alpha1, s, x, y)
                 long_d=(int(res1))
