@@ -123,7 +123,7 @@ def directe(latitude1, longitude1, alpha1, s, a, b):
                 return longitude2,latitude2,alpha2
 
 def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):                      
-                phi = np.linspace(0, 2*pi)
+                phi = np.linspace(-pi, pi)
                 theta = np.linspace(-pi/2, pi/2)
                 phi, theta=np.meshgrid(phi, theta)
 
