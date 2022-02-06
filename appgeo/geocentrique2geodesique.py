@@ -9,7 +9,7 @@ def geocentrique2geodesique(x,y,z,a,b):
     b=float(b)
     long=np.arctan(y/x)
     e=sqrt(1-b**2/a**2)
-    lamda=tan(y/z)**(-1)
+    
     phi0=np.arctan(z/(x**2+y**2)*(1/1-e**2))
     N0=a/sqrt(1-e**2*sin(phi0)**2)
     phi1=np.arctan(z/sqrt(x**2+y**2)*(1+(N0*e**2*sin(phi0))/z))
