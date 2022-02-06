@@ -140,7 +140,7 @@ def add(request):
 
                                 
 
-                if not (X_centrique**2/x**2 + Y_centrique**2/x**2 + Z_centrique**2/y**2 <= 1.1 and X_centrique**2/x**2 + Y_centrique**2/x**2 + Z_centrique**2/y**2 >= 0.9) and systeme == "2":
+                if not (X_centrique**2/(x+h_des)**2 + Y_centrique**2/(x+h_des)**2 + Z_centrique**2/(y+h_des)**2 <= 1.1 and X_centrique**2/(x+h_des)**2 + Y_centrique**2/(x+h_des)**2 + Z_centrique**2/(y+h_des)**2 >= 0.9) and systeme == "2":
                         return render( request   ,'direct.html', {'error_msg': "veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi."} )
                 #if request.methode =="post" and "Calculer" in request.POST :
                 res1,res2,res3=direct.direct(latitude1, longitude1, alpha1, s, x, y)
