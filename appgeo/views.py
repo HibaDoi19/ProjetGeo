@@ -138,7 +138,7 @@ def add(request):
 
                                 
 
-                if not (X_centrique**2/x**2 + Y_centrique**2/x**2 + Z_centrique**2/y**2 == 1) and systeme == "2":
+                if not (X_centrique**2/x**2 + Y_centrique**2/x**2 + Z_centrique**2/y**2 <= 1.1 and X_centrique**2/x**2 + Y_centrique**2/x**2 + Z_centrique**2/y**2 >= 0.9) and systeme == "2":
                         return render( request   ,'direct.html', {'error_msg': "veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi."} )
                 #if request.methode =="post" and "Calculer" in request.POST :
                 res1,res2,res3=direct.direct(latitude1, longitude1, alpha1, s, x, y)
@@ -207,13 +207,13 @@ def inverse(request):
         drc_lat_2=int(request.GET["drc_lat_2"])
         drc_long_2=int(request.GET["drc_long_2"])
 
-        X1= request.GET["cx1"]
-        Y1= request.GET["cy1"]
-        Z1= request.GET["cz1"]
+        X1= float(request.GET["cx1"])
+        Y1= float(request.GET["cy1"])
+        Z1= float(request.GET["cz1"])
 
-        X2= request.GET["cx2"]
-        Y2= request.GET["cy2"]
-        Z2= request.GET["cz2"]
+        X2= float(request.GET["cx2"])
+        Y2= float(request.GET["cy2"])
+        Z2= float(request.GET["cz2"])
 
         systeme=request.GET['sys']
         if systeme =="1":
@@ -301,7 +301,10 @@ def inverse(request):
                 latitude2=lat2*pi/180
                 longitude2=long2*pi/180
                 h1=h1
-
+        if not (X1**2/(x+h1)**2 + Y1**2/(x+h1)**2 + Z1**2/(y+h1)**2 <= 1.1 and X1**2/(x+h1)**2 + Y1**2/(x+h1)**2 + Z1**2/(y+h1)**2 >= 0.9) and systeme == "2":
+                        return render( request   ,'inverse.html', {'error_msg': "veuillez rentrer des valeurs valables de X1, Y1, Z1 dnas l'ellipsoide choisi."} )
+        if not (X2**2/(x+h2)**2 + Y2**2/(x+h2)**2 + Z2**2/(y+h1)**2 <= 1.1 and X2**2/(x+h2)**2 + Y2**2/(x+h1)**2 + Z2**2/(y+h1)**2 >= 0.9) and systeme == "2":
+                        return render( request   ,'inverse.html', {'error_msg1': "veuillez rentrer des valeurs valables de X2, Y2, Z2 dnas l'ellipsoide choisi."} )
         xx,yy,zz=innverse.inversee(latitude1,latitude2,longitude1,longitude2,x,y)
         xx=float(xx)
         yy=float(yy)

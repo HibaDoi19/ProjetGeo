@@ -165,22 +165,27 @@
     
     <div>
     <label class="mm">X</label>
-    <input type="number" name="cx" placeholder="la valeur de x" value="1" min="1" id="fx1" ><br>
+    <input type="number" name="cx" placeholder="la valeur de x" value="1"  id="fx1" ><br>
     <div id="cx1" class="emsg"></div>
     </div>
     <div>
     <label class="mm">Y</label>
-    <input type="number" name="cy" placeholder="la valeur de y" value="1" min="1"  id="fy1"><br>
+    <input type="number" name="cy" placeholder="la valeur de y" value="1"   id="fy1"><br>
     <div id="cy1" class="emsg"></div>
     </div>
     <div>
     <label class="mm">Z</label>
-    <input type="number" name="cz" placeholder="la valeur de z" value="1" min="1"  id="fz1"><br>
+    <input type="number" name="cz" placeholder="la valeur de z" value="1"   id="fz1"><br>
     <div id="cz1" class="emsg"></div>
     </div>
     
 
     </div>
+    {% if error_msg %}
+    <script>
+        alert("Veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi!!")
+    </script>
+    {% endif %}
 
 
 </div>
@@ -215,12 +220,14 @@
     </div>
 </div>
 
+
 </center>
-    {% if error_msg %}
-    <script>
-        alert("Veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi!!")
-    </script>
-    {% endif %}
+{% if error_msg %}
+<script>
+    alert("Veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi!!")
+</script>
+{% endif %}
+
 
 
 </div>
