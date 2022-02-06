@@ -223,7 +223,7 @@
 
 </center>
 {% if error_msg %}
-<script>
+<script defer >
     alert("Veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi!!")
 </script>
 {% endif %}
@@ -232,19 +232,7 @@
 
 </div>
 
-<script>
-    var button = getElementById("submitbutton");
-  var a = getElementById('fa');
-  var b = getElementById('fb');
-  var X = getElementById('fx1');
-  var Y = getElementById('fy1');
-  var Z = getElementById('fz1');
-  button.onclick = function(){
-      if (! (X*X/(a*a) + Y*Y/(a*a) + Z*Z/(b*b) == 1)){
-        alert("ples enter correct coords")
-      }
-  }
-</script>
+
 {% endblock %}
 
 
