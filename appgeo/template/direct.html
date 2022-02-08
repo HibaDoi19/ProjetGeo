@@ -180,12 +180,7 @@
     </div>
     
 
-    </div>
-    {% if error_msg %}
-    <script>
-        alert("Veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi!!")
-    </script>
-    {% endif %}
+
 
 
 </div>
@@ -226,11 +221,12 @@
 <script defer >
     alert("Veuillez rentrer des valeurs valables de X, Y, Z dnas l'ellipsoide choisi!!")
 </script>
-{% elif  error_msg1 %}
+{% elif  error_msg2 %}
 <script  defer>
     alert("veuillez rentrer des valeurs différentes du centre de l'ellipsoide dans le deusieme point.")
 </script>
 {% endif %}
+
 
 
 

@@ -1,18 +1,11 @@
 from re import template
 from typing import Text
-from _plotly_utils.utils import template_doc
-from django.shortcuts import render
-from django.http import HttpResponse
 from math import *
-from plotly.offline import iplot, init_notebook_mode, plot 
 import plotly.graph_objects as go
-from numpy import FLOATING_POINT_SUPPORT, sin, cos, pi
+from numpy import  sin, cos, pi
 import  numpy as np
-import plotly.express as px 
-import datetime
-import glob
-import logging
-import os
+
+
 
 
 def visualisation(longitude1 , latitude1,alpha1,s,a,b,h):
@@ -26,25 +19,25 @@ def visualisation(longitude1 , latitude1,alpha1,s,a,b,h):
         long=[]
         az_dir.append(alpha1)
         lat.append(latitude1)
-        long.append(longitude1) 
+        long.append(longitude1)
         for i in range(1,n) :
                 aa,bb,cc=directe(latitude1,longitude1,alpha1,t,a,b)
                 lat.append(bb)
                 long.append(aa)
                 az_dir.append(cc)
                 alpha1=az_dir[i]
-                longitude1=long[i] 
+                longitude1=long[i]
                 latitude1=lat[i]
         x=[]
         y=[]
         z=[]
-        for i in range(2,n): 
+        for i in range(2,n):
                 e=sqrt((a**2-b**2)/(a**2))
                 N=a/sqrt(1-e**2*sin(lat[i])**2)
                 x.append((N+h)*cos(long[i])*cos(lat[i]))
                 y.append((N+h)*sin(long[i])*cos(lat[i]))
                 z.append((N*(1-e**2)+h)*sin(lat[i]))
-        return x,y,z 
+        return x,y,z
 
 def directe(latitude1, longitude1, alpha1, s, a, b):
         #VERIFICATION DES PARAMèTRE DE L'ELLIPSOIDE
@@ -101,36 +94,25 @@ def directe(latitude1, longitude1, alpha1, s, a, b):
                 longitude2 = (longitude1 + deltalambda)
                 #Calcul de l'azimut alpha2 et de l'azimut inverse
                 alpha2 = atan2 ( Sinalphae, (cos(Beta1) * cos(sigma) * cos(alpha1)-sin(Beta1) * sin(sigma)))
-                alpha21=0
-                if ( alpha2 < pi ) :
-                        alpha21 = alpha2 + pi
-                if ( alpha2 > pi ) :
-                        alpha21 = alpha2 - pi
-                '''if alpha1<pi and longitude2<(longitude1*180/pi) and longitude1<0:
-                        longitude2 = longitude2+180
-                if alpha1<pi and longitude1>0 and longitude2<(longitude1*180/pi) : 
-                        longitude2=longitude2-180  
-                if alpha1>pi and longitude2>(longitude1*180/pi) and longitude1<0: 
-                        longitude2 = longitude2+180
-                if alpha1>pi and longitude1>0 and longitude2>(longitude1*180/pi): 
-                        longitude2=longitude2+180
-                if longitude2>180:
-                        longitude2=longitude2-360
-                if longitude2<-180:
-                        longitude2=longitude2+360'''
-                                        
+                if latitude1==pi/2:
+                        return longitude2+pi,latitude2,alpha2
 
-                return longitude2,latitude2,alpha2
+                else:
+                        return longitude2,latitude2,alpha2
 
-def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):                      
+
+
+
+def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 phi = np.linspace(-pi, pi)
                 theta = np.linspace(-pi/2, pi/2)
+
                 phi, theta=np.meshgrid(phi, theta)
 
                 X = cos(theta) * sin(phi) * a
                 Y = cos(theta) * cos(phi) * a
                 Z = sin(theta)*b
-                
+
                 layout = go.Layout(width = 800, height =800,title_text='Géodesique')
 
                 fig = go.Figure(data=[go.Surface(x = X, y = Y, z=Z, colorscale = 'Blues')], layout=layout)
@@ -138,6 +120,9 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 fig.update_traces(contours_z=dict(show=True, usecolormap=True,highlightcolor="limegreen", project_z=True))
 
                 x,y,z=visualisation(longitude1,latitude1,alpha1,s,a,b,h)
+
+
+
 
                 fig.add_scatter3d(x=x,y=y,z=z,mode='lines',marker ={'color':'black'})
 
@@ -147,7 +132,7 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 for i in [-80,-70,-60,-50,-40,-30,-20,-10,10,20,30,40,50,60,70,80]:
                         phi = np.linspace(0, 360,100)
                         theta = np.linspace(i, i,100)
-    
+
                         phi = phi*pi/180
                         theta = theta*pi/180
                         #phi, theta=np.meshgrid(phi, theta)
@@ -156,8 +141,8 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                         z = sin(theta)*b
                         t="latitude"+str(i)
                         fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'},text=t)
-                        
-                        phi = np.linspace(0, 360,100)
+                ########################################################################
+                phi = np.linspace(0, 360,100)
                 theta = np.linspace(0, 0,100)
                 phi = phi*pi/180
                 theta = theta*pi/180
@@ -167,32 +152,96 @@ def ellipsoide(longitude1 , latitude1,alpha1,s,a,b,h):
                 z = sin(theta)*b
                 t="équateur"
                 fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'#FFC300'},text=t)
-    
-                for i in [-170,-160,-150,-140,-130,-120,-110,-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,0,10,20,30,40,50,60,70,80,100,110,120,130,140,150,160,170,180]:
+                ############################################################################3
+                for i in [-170,-160,-150,-140,-130,-120,-110,-100,-80,-90,-70,-60,-50,-40,-30,-20,-10,10,20,30,40,50,60,70,80,100,110,120,130,140,150,160,170]:
                         phi = np.linspace(i, i,100)
                         theta = np.linspace(-90,90,100)
-                        
+
                         phi = phi*pi/180
                         theta = theta*pi/180
-                        #phi, theta=np.meshgrid(phi, theta)
-                        x = cos(theta) * sin(phi) * a
-                        y = cos(theta) * cos(phi) * a
-                        z = sin(theta)*b
+                phi = phi*pi/180
+                theta = theta*pi/180
+                x=[]
+                y=[]
+                z=[]
+
+                for i in range(100):
+                        e=sqrt((a**2-b**2)/(a**2))
+                        N=a/sqrt(1-e**2*sin(theta[i]**2))
+                        x.append((N)*cos(phi[i])*cos(theta[i]))
+                        y.append((N)*sin(phi[i])*cos(theta[i]))
+                        z.append((N*(1-e**2))*sin(theta[i]))
+                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'})
+                ##################################################################################
+                phi = np.linspace(0, 0,100)
+                theta = np.linspace(-90,90,100)
+
+                phi = phi*pi/180
+                theta = theta*pi/180
+                phi = phi*pi/180
+                theta = theta*pi/180
+                x=[]
+                y=[]
+                z=[]
+
+                for i in range(100):
+                        e=sqrt((a**2-b**2)/(a**2))
+                        N=a/sqrt(1-e**2*sin(theta[i]**2))
+                        x.append((N)*cos(phi[i])*cos(theta[i]))
+                        y.append((N)*sin(phi[i])*cos(theta[i]))
+                        z.append((N*(1-e**2))*sin(theta[i]))
+                t="Greenwich"
+
+                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'#28B463'},text=t)
+                ###################################################################################
+                phi = np.linspace(-180,-180,100)
+                theta = np.linspace(-90,90,100)
+
+                phi = phi*pi/180
+                theta = theta*pi/180
+                phi = phi*pi/180
+                theta = theta*pi/180
+                x=[]
+                y=[]
+                z=[]
+
+                for i in range(100):
+                        e=sqrt((a**2-b**2)/(a**2))
+                        N=a/sqrt(1-e**2*sin(theta[i]**2))
+                        x.append((N)*cos(phi[i])*cos(theta[i]))
+                        y.append((N)*sin(phi[i])*cos(theta[i]))
+                        z.append((N*(1-e**2))*sin(theta[i]))
+                t="anti-Greenwich"
+                fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'#28B463'},text=t)
+
+                ###########################################
+
+                plot_div = fig.to_html(full_html=False)
+
+
+
+                return plot_div
+
+
                         
-                        fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'red'})
-                phi = np.linspace(90, 90,100)
+                ###########################################
+                phi = np.linspace(0, 0,100)
                 theta = np.linspace(-90,90,100)
                 
                 phi = phi*pi/180
                 theta = theta*pi/180
-                #phi, theta=np.meshgrid(phi, theta)
-                x = cos(theta) * sin(phi) * a
-                y = cos(theta) * cos(phi) * a
-                z = sin(theta)*b
+                x=[]
+                y=[]
+                z=[]
+
+                for i in range(100):
+                        e=sqrt((a**2-b**2)/(a**2))
+                        N=a/sqrt(1-e**2*sin(theta[i]**2))
+                        x.append((N)*cos(phi[i])*cos(theta[i]))
+                        y.append((N)*sin(phi[i])*cos(theta[i]))
+                        z.append((N*(1-e**2))*sin(theta[i]))
                 t="Greenwich"
                 fig.add_scatter3d(x =x, y = y, z=z,mode='lines', marker={'color':'#28B463'},text=t)
-                        
-                ###########################################
 
                 plot_div = fig.to_html(full_html=False)
 
